@@ -8,5 +8,12 @@
 </head>
 <body>
 Foo
+${errors} <br/>
+${user.id}: ${user.nome} <br/>
+
+<c:forEach var="u" items="${users}">
+	${u.id}: ${u.nome} <br/>
+</c:forEach>
+
 </body>
 </html>
