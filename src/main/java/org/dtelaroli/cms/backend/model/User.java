@@ -1,4 +1,4 @@
-package org.dtelaroli.simple.cms.model;
+package org.dtelaroli.cms.backend.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
