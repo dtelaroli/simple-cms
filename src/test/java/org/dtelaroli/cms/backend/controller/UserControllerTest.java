@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.caelum.vraptor.plus.Action;
+import br.com.caelum.vraptor.plus.api.Action;
 
 public class UserControllerTest {
 

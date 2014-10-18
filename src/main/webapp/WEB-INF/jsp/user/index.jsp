@@ -9,9 +9,8 @@
 <body>
 Foo
 ${errors} <br/>
-${user.id}: ${user.nome} <br/>
 
-<c:forEach var="u" items="${users}">
+<c:forEach var="u" items="${userList}">
 	${u.id}: ${u.nome} <br/>
 </c:forEach>
 

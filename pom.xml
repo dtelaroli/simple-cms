@@ -11,7 +11,7 @@
 	<properties>
 		<jettyVersion>9.1.1.v20140108</jettyVersion>
 		<weld.version>2.1.2.Final</weld.version>
-		<ebean.version>3.3.2</ebean.version>
+		<ebean.version>4.1.6</ebean.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -23,8 +23,13 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.caelum.vraptor</groupId>
-			<artifactId>plus-core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<artifactId>plus</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.caelum.vraptor</groupId>
+			<artifactId>plus-db-ebean</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
@@ -109,7 +114,6 @@
 			<version>1.4.181</version>
 		</dependency>
 
-
 	</dependencies>
 	<build>
 		<finalName>simple-cms</finalName>
@@ -147,8 +151,7 @@
 							<goal>enhance</goal>
 						</goals>
 						<configuration>
-							<packages>org.dtelaroli.simple.cms.model.**</packages>
-							<transformArgs>debug=0;transientInternalFields=true</transformArgs>
+							<packages>org.dtelaroli.cms.backend.model.**</packages>
 							<classSource>${project.build.outputDirectory}</classSource>
 							<classDestination>${project.build.outputDirectory}</classDestination>
 						</configuration>
