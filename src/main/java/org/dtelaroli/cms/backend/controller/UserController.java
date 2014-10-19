@@ -13,12 +13,14 @@ import javax.inject.Inject;
 import org.dtelaroli.cms.backend.model.User;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.plus.api.Action;
 
 /**
  * Created by denilson on 14/10/14.
  */
-@Controller
+@Controller @Path("/user")
 public class UserController {
 
 	private final Action action;
@@ -36,13 +38,10 @@ public class UserController {
 	}
 
 	public List<User> index() {
-		User user = new User();
-		user.setNome("Bar");
-		action.use(save()).save(user);
-		
 		return action.use(listAll()).all(User.class);
 	}
 	
+	@Get("/{first}/{limit}")
 	public List<User> paginate(int first, int limit) {
 		return action.use(pagination())
 				.first(first)
@@ -56,5 +55,11 @@ public class UserController {
 	
 	public void remove(Long id) {
 		action.use(delete()).by(User.class, id);
+	}
+	
+	public void add() {
+		User user = new User();
+		user.setNome("Bar");
+		action.use(save()).save(user);
 	}
 }
