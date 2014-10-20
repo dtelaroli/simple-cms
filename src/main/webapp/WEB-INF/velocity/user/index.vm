@@ -1,0 +1,16 @@
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+#foreach($error in $errors)
+	$error<br/>
+#end
+<br/>
+
+$first - $limit<br/>
+#foreach($user in $userList)
+	$user.id: $user.nome<br/>
+#end
+</body>
+</html>

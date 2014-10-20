@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>$!page_title</title>
+</head>
+<body>
+
+	<section>
+		$screen_content
+	</section>
+
+	#parse('WEB-INF/elements/error.vm')
+	
+</body>
+</html>

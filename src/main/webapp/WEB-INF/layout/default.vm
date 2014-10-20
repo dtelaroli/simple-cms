@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>$!page_title</title>
+</head>
+<body>
+
+	<header>
+		#parse('WEB-INF/elements/header.vm')
+	</header>
+
+	<nav>
+		#parse('WEB-INF/elements/menu.vm')
+	</nav>
+
+	<section>
+		$screen_content
+	</section>
+
+	<br/>
+	<footer>#parse('WEB-INF/elements/footer.vm')</footer>
+
+	#parse('WEB-INF/elements/error.vm')
+	
+</body>
+</html>
