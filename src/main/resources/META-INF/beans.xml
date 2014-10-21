@@ -11,6 +11,6 @@
 			See more details at:
 			http://www.cdi-spec.org/faq/#accordion12
 		 -->
-		<exclude name="br.com.caelum.vraptor.musicjungle.model.*"></exclude>
+		<exclude name="org.dtelaroli.cms.backend.model.*"></exclude>
 	</scan>
 </beans>

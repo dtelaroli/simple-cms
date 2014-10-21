@@ -14,7 +14,7 @@
 			<include-prelude>/WEB-INF/elements/prelude.jspf</include-prelude>
 		</jsp-property-group>
 	</jsp-config>
-
+	
 	<context-param>
 		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
 		<param-value>messages</param-value>
@@ -22,13 +22,35 @@
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener>
-
 	<servlet>
 		<servlet-name>velocity</servlet-name>
-		<servlet-class>org.apache.velocity.tools.view.servlet.VelocityLayoutServlet</servlet-class>
+		<servlet-class>org.apache.velocity.tools.view.VelocityLayoutServlet</servlet-class>
+		<init-param>
+			<param-name>org.apache.velocity.toolbox</param-name>
+			<param-value>/WEB-INF/tools.xml</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>org.apache.velocity.properties</param-name>
+			<param-value>/WEB-INF/velocity.properties</param-value>
+		</init-param>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>velocity</servlet-name>
 		<url-pattern>*.vm</url-pattern>
 	</servlet-mapping>
+	
+		<filter>
+        <filter-name>vraptor</filter-name>
+        <filter-class>br.com.caelum.vraptor.VRaptor</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>vraptor</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+	
 </web-app>

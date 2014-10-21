@@ -17,7 +17,7 @@ public class UserControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		controller = new UserController(action);
+//		controller = new UserController(action);
 	}
 
 	@Test

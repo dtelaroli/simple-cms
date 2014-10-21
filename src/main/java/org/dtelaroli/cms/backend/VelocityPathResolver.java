@@ -27,6 +27,6 @@ public class VelocityPathResolver extends DefaultPathResolver {
 
 	@Override
 	protected String getExtension() {
-		return "vm";
+		return "jsp";
 	}
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<tools>
+	<!-- <toolbox scope="request">
+		<tool key="linkTo" class="org.dtelaroli.cms.backend.VelocityLinkToHandler" />
+	</toolbox> -->
+	<toolbox scope="request">
+		<tool key="foo" class="org.apache.velocity.tools.generic.LinkTool" uri="http://velocity.apache.org/tools/devel/" />
+	</toolbox>
+</tools>
