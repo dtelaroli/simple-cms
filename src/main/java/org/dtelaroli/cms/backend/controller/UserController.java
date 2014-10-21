@@ -1,9 +1,9 @@
 package org.dtelaroli.cms.backend.controller;
 
 import static br.com.caelum.vraptor.plus.api.Actions.delete;
-import static br.com.caelum.vraptor.plus.api.Actions.listAll;
+import static br.com.caelum.vraptor.plus.api.Actions.list;
 import static br.com.caelum.vraptor.plus.api.Actions.pagination;
-import static br.com.caelum.vraptor.plus.api.Actions.save;
+import static br.com.caelum.vraptor.plus.api.Actions.persist;
 import static br.com.caelum.vraptor.plus.api.Actions.view;
 
 import java.util.List;
@@ -38,19 +38,19 @@ public class UserController {
 	}
 
 	public List<User> index() {
-		return action.use(listAll()).all(User.class);
+		return action.use(list()).all(User.class);
 	}
 	
-	@Get("/{first}/{limit}")
-	public List<User> paginate(int first, int limit) {
+	@Get("/{page}/{limit}")
+	public List<User> paginate(int page, int limit) {
 		return action.use(pagination())
-				.first(first)
+				.page(page)
 				.limit(limit)
 				.all(User.class);
 	}
 	
 	public User get(Long id) {
-		return action.use(view()).get(User.class, id);
+		return action.use(view()).load(User.class, id);
 	}
 	
 	public void remove(Long id) {
@@ -60,6 +60,6 @@ public class UserController {
 	public void add() {
 		User user = new User();
 		user.setNome("Bar");
-		action.use(save()).save(user);
+		action.use(persist()).save(user);
 	}
 }
