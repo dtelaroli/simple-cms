@@ -38,7 +38,7 @@
 	
 	<servlet-mapping>
 		<servlet-name>velocity</servlet-name>
-		<url-pattern>*.vm</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
 	</servlet-mapping>
 	
 		<filter>
