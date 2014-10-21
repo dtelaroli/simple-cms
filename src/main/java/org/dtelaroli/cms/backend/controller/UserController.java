@@ -4,7 +4,7 @@ import static br.com.caelum.vraptor.plus.api.Actions.delete;
 import static br.com.caelum.vraptor.plus.api.Actions.list;
 import static br.com.caelum.vraptor.plus.api.Actions.pagination;
 import static br.com.caelum.vraptor.plus.api.Actions.persist;
-import static br.com.caelum.vraptor.plus.api.Actions.view;
+import static br.com.caelum.vraptor.plus.api.Actions.load;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import br.com.caelum.vraptor.plus.api.Action;
 @Controller @Path("/user")
 public class UserController {
 
-	private final Action action;
+	private final Action act;
 
 	/**
 	 * @deprecated
@@ -33,33 +33,30 @@ public class UserController {
 	}
 
 	@Inject
-	public UserController(Action action) {
-		this.action = action;
+	public UserController(Action act) {
+		this.act = act;
 	}
 
 	public List<User> index() {
-		return action.use(list()).all(User.class);
+		return act.use(list()).all(User.class);
 	}
 	
 	@Get("/{page}/{limit}")
 	public List<User> paginate(int page, int limit) {
-		return action.use(pagination())
-				.page(page)
-				.limit(limit)
-				.all(User.class);
+		return act.use(pagination()).page(page).limit(limit).all(User.class);
 	}
 	
-	public User get(Long id) {
-		return action.use(view()).load(User.class, id);
+	public User view(Long id) {
+		return act.use(load()).by(User.class, id);
 	}
 	
 	public void remove(Long id) {
-		action.use(delete()).by(User.class, id);
+		act.use(delete()).by(User.class, id);
 	}
 	
 	public void add() {
 		User user = new User();
 		user.setNome("Bar");
-		action.use(persist()).save(user);
+		act.use(persist()).save(user);
 	}
 }
