@@ -28,7 +28,7 @@ public class VelocityLinkToHandler extends LinkToHandler {
 		this.context = context;
 	}
 	
-	public void requestSucceded(@Observes VRaptorInitialized init) {
+	public void init(@Observes VRaptorInitialized init) {
 		context.setAttribute("linkTo", this);
 	}
 	
