@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <tools>
-	<!-- <toolbox scope="request">
+	<!-- <toolbox scope="application">
 		<tool key="linkTo" class="org.dtelaroli.cms.backend.VelocityLinkToHandler" />
 	</toolbox> -->
 	<toolbox scope="request">
