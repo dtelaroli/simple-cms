@@ -7,5 +7,5 @@ page: $page, limit: $limit
 #end
 <br />
 
-<a href="$linkTo[$UserController].add()">$linkTo[$UserController].add()</a>
+<a href="$linkTo[$UserController].add()">Add</a>
 
