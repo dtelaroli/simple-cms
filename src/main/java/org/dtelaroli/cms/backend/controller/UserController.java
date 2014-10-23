@@ -58,6 +58,6 @@ public class UserController {
 	public void add() throws Exception {
 		User user = new User();
 		user.setNome("Bar");
-		act.use(persist()).andRedirect(getClass(), user).view(user.getId());
+		act.use(persist()).save(user).andRedirect(getClass()).view(user.getId());
 	}
 }
