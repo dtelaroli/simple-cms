@@ -1,8 +1,8 @@
 #set($page_title = "Hello")
 
 <h2>User - View</h2>
-$user.getId(): $user.getNome()
+$user.id: $user.name
 <br />
 
-<a href="$linkTo[$UserController].index()">All</a>
+<a href="$linkTo[$UserController].paginate(1, 2)">All</a>
 

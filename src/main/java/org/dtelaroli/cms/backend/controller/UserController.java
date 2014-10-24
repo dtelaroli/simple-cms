@@ -15,7 +15,9 @@ import org.dtelaroli.cms.backend.model.User;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.plus.api.Action;
+import br.com.caelum.vraptor.plus.api.db.pagination.Page;
 
 /**
  * Created by denilson on 14/10/14.
@@ -42,8 +44,8 @@ public class UserController {
 	}
 	
 	@Get("/{page}/{limit}")
-	public List<User> paginate(int page, int limit) {
-		return act.use(pagination()).page(page).limit(limit).all(User.class);
+	public Page<User> paginate(int page, int limit) {
+		return act.use(pagination()).page(page).limit(limit).paginate(User.class);
 	}
 	
 	@Get("/{id}")
@@ -51,13 +53,21 @@ public class UserController {
 		return act.use(load()).by(User.class, id);
 	}
 	
-	public void remove(Long id) {
-		act.use(delete()).by(User.class, id);
+	public void add() {
 	}
 	
-	public void add() throws Exception {
-		User user = new User();
-		user.setNome("Bar");
-		act.use(persist()).save(user).andRedirect(getClass()).view(user.getId());
+	@Get("/{id}/edit")
+	public User edit(Long id) {
+		return act.use(load()).by(User.class, id);
 	}
+	
+	@Post
+	public void save(User user) throws Exception {
+		act.use(persist()).save(user).andRedirectTo(getClass()).view(user.getId());
+	}
+	
+	public void remove(Long id) {
+		act.use(delete()).by(User.class, id).andRedirectTo(getClass()).index();
+	}
+	
 }
