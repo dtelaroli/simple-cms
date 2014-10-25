@@ -19,3 +19,4 @@ hs_err_pid*
 simple-cms.iml
 target/
 src/main/webapp/js/lib
+.externalToolBuilders

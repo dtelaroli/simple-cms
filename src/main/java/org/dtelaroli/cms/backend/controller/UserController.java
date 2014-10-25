@@ -8,16 +8,16 @@ import static br.com.caelum.vraptor.plus.api.Actions.persist;
 
 import java.util.List;
 
-import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import org.dtelaroli.cms.backend.model.User;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.plus.api.Act;
+import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.plus.api.Action;
 import br.com.caelum.vraptor.plus.api.db.pagination.Page;
 
@@ -56,13 +56,6 @@ public class UserController {
 	}
 	
 	public void add() {
-		act.use(Foo.class).foo();
-	}
-	
-	static class Foo implements Act {
-		public void foo() {
-			System.out.println("### foo executed");
-		}
 	}
 	
 	@Get("/{id}/edit")
@@ -71,10 +64,16 @@ public class UserController {
 	}
 	
 	@Post
-	public void save(User user) throws Exception {
-		act.use(persist()).save(user).andRedirectTo(getClass()).view(user.getId());
+	public void insert(User user) throws Exception {
+		act.use(persist()).insert(user).andRedirectTo(getClass()).view(user.getId());
 	}
 	
+	@Put
+	public void update(User user) throws Exception {
+		act.use(persist()).update(user).andRedirectTo(getClass()).view(user.getId());
+	}
+	
+	@Delete("/{id}")
 	public void remove(Long id) {
 		act.use(delete()).by(User.class, id).andRedirectTo(getClass()).index();
 	}

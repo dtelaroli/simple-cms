@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>$!page_title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>$!page_title</title>
+	#include('WEB-INF/elements/css.jsp')
 </head>
 <body>
 
-	<header>
-		#parse('WEB-INF/elements/header.vm')
+	<header class="container">
+		#parse('WEB-INF/elements/header.jsp')
 	</header>
 
-	<nav>
-		#parse('WEB-INF/elements/menu.vm')
+	<nav class="container">
+		#parse('WEB-INF/elements/menu.jsp')
 	</nav>
 
-	<section>
+	<section class="container">
 		$screen_content
 	</section>
 
-	<br/>
-	<footer>#parse('WEB-INF/elements/footer.vm')</footer>
+	<footer class="container">#include('WEB-INF/elements/footer.jsp')</footer>
 
-	#parse('WEB-INF/elements/error.vm')
-	
+	#parse('WEB-INF/elements/error.jsp')
+	#include('WEB-INF/elements/js.jsp')	
 </body>
 </html>
