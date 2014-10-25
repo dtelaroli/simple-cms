@@ -23,9 +23,13 @@
 					<a href="$linkTo[$UserController].edit($user.id)" type="button" class="btn btn-default btn-xs">
 						<span class="glyphicon glyphicon-edit"></span>
 					</a>
-					<a href="$linkTo[$UserController].remove($user.id)" type="button" class="btn btn-default btn-xs">
-						<span class="glyphicon glyphicon-remove"></span>
-					</a>
+					<form action="$linkTo[$UserController].remove($user.id)" method="post" 
+						onsubmit="return confirm('Are you sure?')">
+						<button class="btn btn-default btn-xs"
+							name="_method" value="delete">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</form>
 				</div>
 			</td>
 		</tr>

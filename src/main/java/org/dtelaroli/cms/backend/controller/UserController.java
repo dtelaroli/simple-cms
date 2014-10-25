@@ -68,14 +68,14 @@ public class UserController {
 		act.use(persist()).insert(user).andRedirectTo(getClass()).view(user.getId());
 	}
 	
-	@Put
+	@Put("/{id}")
 	public void update(User user) throws Exception {
 		act.use(persist()).update(user).andRedirectTo(getClass()).view(user.getId());
 	}
 	
 	@Delete("/{id}")
 	public void remove(Long id) {
-		act.use(delete()).by(User.class, id).andRedirectTo(getClass()).index();
+		act.use(delete()).by(User.class, id).andRedirectTo(getClass()).paginate(1, 2);
 	}
 	
 }
