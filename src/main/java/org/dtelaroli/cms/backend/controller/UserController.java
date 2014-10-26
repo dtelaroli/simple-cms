@@ -5,10 +5,13 @@ import static br.com.caelum.vraptor.plus.api.Actions.list;
 import static br.com.caelum.vraptor.plus.api.Actions.load;
 import static br.com.caelum.vraptor.plus.api.Actions.pagination;
 import static br.com.caelum.vraptor.plus.api.Actions.persist;
+import static br.com.caelum.vraptor.view.Results.referer;
 
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.dtelaroli.cms.backend.model.User;
 
@@ -20,6 +23,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.plus.api.Action;
 import br.com.caelum.vraptor.plus.api.db.pagination.Page;
+import br.com.caelum.vraptor.validator.Validator;
 
 /**
  * Created by denilson on 14/10/14.
@@ -28,17 +32,19 @@ import br.com.caelum.vraptor.plus.api.db.pagination.Page;
 public class UserController {
 
 	private final Action act;
+	private final Validator validator;
 
 	/**
 	 * @deprecated
 	 */
 	protected UserController() {
-		this(null);
+		this(null, null);
 	}
 
 	@Inject
-	public UserController(Action act) {
+	public UserController(Action act, Validator validator) {
 		this.act = act;
+		this.validator = validator;
 	}
 
 	public List<User> index() {
@@ -64,12 +70,18 @@ public class UserController {
 	}
 	
 	@Post
-	public void insert(User user) throws Exception {
+	public void insert(@NotNull @Valid User user) throws Exception {
+		onErrorRedirect();
 		act.use(persist()).insert(user).andRedirectTo(getClass()).view(user.getId());
+	}
+
+	private void onErrorRedirect() {
+		validator.onErrorUse(referer()).redirect();
 	}
 	
 	@Put("/{id}")
-	public void update(User user) throws Exception {
+	public void update(@NotNull @Valid User user) throws Exception {
+		onErrorRedirect();
 		act.use(persist()).update(user).andRedirectTo(getClass()).view(user.getId());
 	}
 	

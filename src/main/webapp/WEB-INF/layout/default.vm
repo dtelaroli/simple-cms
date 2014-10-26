@@ -17,12 +17,12 @@
 	</nav>
 
 	<section class="container">
+		#parse('WEB-INF/elements/errors.jsp')
 		$screen_content
 	</section>
 
 	<footer class="container">#include('WEB-INF/elements/footer.jsp')</footer>
 
-	#parse('WEB-INF/elements/error.jsp')
 	#include('WEB-INF/elements/js.jsp')	
 </body>
 </html>

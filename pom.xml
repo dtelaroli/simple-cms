@@ -9,23 +9,30 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<jettyVersion>9.1.1.v20140108</jettyVersion>
-		<weld.version>2.2.5.Final</weld.version>
 		<ebean.version>4.1.6</ebean.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>br.com.caelum</groupId>
-			<artifactId>vraptor</artifactId>
-			<version>4.1.1</version>
+			<groupId>br.com.caelum.vraptor</groupId>
+			<artifactId>vraptor-i18n</artifactId>
+			<version>4.0.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>br.com.caelum.vraptor</groupId>
+					<artifactId>vraptor</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		<!-- <dependency> <groupId>br.com.caelum.vraptor</groupId> <artifactId>vraptor-java8</artifactId> 
-			<version>4.0.0.Final</version> </dependency> -->
 		<dependency>
 			<groupId>br.com.caelum.vraptor</groupId>
 			<artifactId>plus</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.caelum.vraptor</groupId>
+			<artifactId>plus-db-ebean</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -44,16 +51,10 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>
-		</dependency>
-		<dependency>
-			<groupId>br.com.caelum.vraptor</groupId>
-			<artifactId>plus-db-ebean</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -66,22 +67,21 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator-cdi</artifactId>
 			<version>5.1.1.Final</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.5</version>
 		</dependency>
+
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator-cdi</artifactId>
-			<version>5.1.1.Final</version>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.181</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
@@ -101,17 +101,6 @@
 			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.avaje.ebeanorm</groupId>
-			<artifactId>avaje-ebeanorm</artifactId>
-			<version>${ebean.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.181</version>
-		</dependency>
-
 	</dependencies>
 	<build>
 		<finalName>simple-cms</finalName>
@@ -128,7 +117,7 @@
 							<goal>enhance</goal>
 						</goals>
 						<configuration>
-							<packages>org.dtelaroli.cms.backend.model.**</packages>
+							<packages>org.dtelaroli.cms.backend.model.*</packages>
 							<classSource>${project.build.outputDirectory}</classSource>
 							<classDestination>${project.build.outputDirectory}</classDestination>
 						</configuration>

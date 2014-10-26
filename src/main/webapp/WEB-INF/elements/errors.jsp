@@ -5,3 +5,7 @@
     Reference name: $invocation_exception.referenceName
     Method name: $invocation_exception.methodName
 #end
+
+#foreach($error in $errors)
+	$t[$error.category]: $error.message<br/>
+#end
