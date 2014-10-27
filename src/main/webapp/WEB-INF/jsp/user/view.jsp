@@ -2,4 +2,4 @@
 ${user.id}: ${user.name}
 <br />
 
-<a href="${linkTo[UserController].paginate(1, 2)}">All</a>
+<a href="${linkTo[UserController].paginate()}">All</a>

@@ -1,11 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ attribute name="controller" required="true" type="java.lang.Object" %>
-<%@ attribute name="page" required="true" type="java.lang.Object" %>
+<%@ attribute name="page" required="true" type="br.com.caelum.vraptor.plus.api.db.pagination.Page" %>
 
 <ul class="pagination pagination-sm">
 	<c:if test="${page.number > 1}">
 		<li>
-			<a href="${linkTo[UserController].paginate(1, page.limit)}">&laquo;</a>
+			<a href="${linkTo[UserController].paginate}">&laquo;</a>
 		</li>
 	</c:if>
 	<c:if test="${page.number eq 1}">
@@ -15,7 +15,7 @@
 	</c:if>
 	<c:if test="${page.hasPrev()}">
 		<li>
-			<a href="${linkTo[UserController].paginate(page.prev, page.limit)}">&lt;</a>
+			<a href="${linkTo[UserController].paginate(page.prev)}">&lt;</a>
 		</li>
 	</c:if>
 	<c:if test="${not page.hasPrev()}">
@@ -31,13 +31,13 @@
 		</c:if>
 		<c:if test="${i ne page.number}">
 			<li>
-				<a href="${linkTo[UserController].paginate(i, page.limit)}">${i}</a>
+				<a href="${linkTo[UserController].paginate(i)}">${i}</a>
 			</li>
 		</c:if>
 	</c:forEach>
 	<c:if test="${page.hasNext()}">
 		<li>
-			<a href="${linkTo[UserController].paginate(page.next, page.limit)}">&gt;</a>
+			<a href="${linkTo[UserController].paginate(page.next)}">&gt;</a>
 		</li>
 	</c:if>
 	<c:if test="${not page.hasNext()}">
@@ -47,7 +47,7 @@
 	</c:if>
 	<c:if test="${page.number < page.last}">
 		<li>
-			<a href="${linkTo[UserController].paginate(page.last, page.limit)}">&raquo;</a>
+			<a href="${linkTo[UserController].paginate(page.last)}">&raquo;</a>
 		</li>
 	</c:if>
 	<c:if test="${page.number >= page.last}">

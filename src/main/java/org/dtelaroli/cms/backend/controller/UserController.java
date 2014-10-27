@@ -23,7 +23,6 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.plus.api.Action;
 import br.com.caelum.vraptor.plus.api.db.pagination.Page;
-import br.com.caelum.vraptor.validator.Validator;
 
 /**
  * Created by denilson on 14/10/14.
@@ -32,28 +31,30 @@ import br.com.caelum.vraptor.validator.Validator;
 public class UserController {
 
 	private final Action act;
-	private final Validator validator;
 
 	/**
 	 * @deprecated
 	 */
 	protected UserController() {
-		this(null, null);
+		this(null);
 	}
 
 	@Inject
-	public UserController(Action act, Validator validator) {
+	public UserController(Action act) {
 		this.act = act;
-		this.validator = validator;
 	}
 
 	public List<User> index() {
 		return act.use(list()).all(User.class);
 	}
 	
-	@Get("/{page}/{limit}")
-	public Page<User> paginate(int page, int limit) {
-		return act.use(pagination()).page(page).limit(limit).paginate(User.class);
+	public Page<User> paginate() {
+		return paginate(1);
+	}
+	
+	@Get("/paginate/{page}")
+	public Page<User> paginate(int page) {
+		return act.use(pagination()).page(page).limit(2).paginate(User.class);
 	}
 	
 	@Get("/{id}")
@@ -73,10 +74,11 @@ public class UserController {
 	public void insert(@NotNull @Valid User user) throws Exception {
 		onErrorRedirect();
 		act.use(persist()).insert(user).andRedirectTo(getClass()).view(user.getId());
+		
 	}
 
 	private void onErrorRedirect() {
-		validator.onErrorUse(referer()).redirect();
+		act.validator().onErrorUse(referer()).redirect();
 	}
 	
 	@Put("/{id}")
@@ -87,7 +89,7 @@ public class UserController {
 	
 	@Delete("/{id}")
 	public void remove(Long id) {
-		act.use(delete()).by(User.class, id).andRedirectTo(getClass()).paginate(1, 2);
+		act.use(delete()).by(User.class, id).andRedirectTo(getClass()).paginate(1);
 	}
 	
 }

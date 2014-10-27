@@ -117,7 +117,7 @@
 				<executions>
 					<execution>
 						<id>main</id>
-						<phase>process-classes</phase>
+						<phase>compile</phase>
 						<goals>
 							<goal>enhance</goal>
 						</goals>
