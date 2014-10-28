@@ -9,7 +9,8 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<ebean.version>4.1.6</ebean.version>
+		<ebean.version>4.1.8</ebean.version>
+		<weld.version>2.2.4.Final</weld.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -27,12 +28,22 @@
 		</dependency>
 		<dependency>
 			<groupId>br.com.caelum.vraptor</groupId>
-			<artifactId>plus</artifactId>
+			<artifactId>actions-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>${weld.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet-core</artifactId>
+			<version>${weld.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>br.com.caelum.vraptor</groupId>
-			<artifactId>plus-db-ebean</artifactId>
+			<artifactId>actions-db-ebean</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -50,11 +61,6 @@
 					<groupId>javax.servlet</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.7</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
