@@ -21,7 +21,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
-import br.com.caelum.vraptor.plus.api.Action;
+import br.com.caelum.vraptor.plus.api.Act;
 import br.com.caelum.vraptor.plus.api.db.pagination.Page;
 
 /**
@@ -30,7 +30,7 @@ import br.com.caelum.vraptor.plus.api.db.pagination.Page;
 @Controller @Path("/user")
 public class UserController {
 
-	private final Action act;
+	private final Act act;
 
 	/**
 	 * @deprecated
@@ -40,12 +40,12 @@ public class UserController {
 	}
 
 	@Inject
-	public UserController(Action act) {
+	public UserController(Act act) {
 		this.act = act;
 	}
 
 	public List<User> index() {
-		return act.use(list()).all(User.class);
+		return act.as(list()).all(User.class);
 	}
 	
 	public Page<User> paginate() {
@@ -54,12 +54,12 @@ public class UserController {
 	
 	@Get("/paginate/{page}")
 	public Page<User> paginate(int page) {
-		return act.use(pagination()).page(page).limit(2).paginate(User.class);
+		return act.as(pagination()).page(page).limit(2).paginate(User.class);
 	}
 	
 	@Get("/{id}")
 	public User view(Long id) {
-		return act.use(load()).by(User.class, id);
+		return act.as(load()).by(User.class, id);
 	}
 	
 	public void add() {
@@ -67,13 +67,13 @@ public class UserController {
 	
 	@Get("/{id}/edit")
 	public User edit(Long id) {
-		return act.use(load()).by(User.class, id);
+		return act.as(load()).by(User.class, id);
 	}
 	
 	@Post
 	public void insert(@NotNull @Valid User user) throws Exception {
 		onErrorRedirect();
-		act.use(persist()).insert(user).andRedirectTo(getClass()).view(user.getId());
+		act.as(persist()).insert(user).andRedirectTo(getClass()).view(user.getId());
 		
 	}
 
@@ -84,12 +84,12 @@ public class UserController {
 	@Put("/{id}")
 	public void update(@NotNull @Valid User user) throws Exception {
 		onErrorRedirect();
-		act.use(persist()).update(user).andRedirectTo(getClass()).view(user.getId());
+		act.as(persist()).update(user).andRedirectTo(getClass()).view(user.getId());
 	}
 	
 	@Delete("/{id}")
 	public void remove(Long id) {
-		act.use(delete()).by(User.class, id).andRedirectTo(getClass()).paginate(1);
+		act.as(delete()).by(User.class, id).andRedirectTo(getClass()).paginate(1);
 	}
 	
 }
