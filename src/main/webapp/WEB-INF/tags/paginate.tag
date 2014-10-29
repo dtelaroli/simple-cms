@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ attribute name="controller" required="true" type="java.lang.Object" %>
-<%@ attribute name="page" required="true" type="br.com.caelum.vraptor.plus.api.db.pagination.Page" %>
+<%@ attribute name="page" required="true" type="java.lang.Object" %>
 
 <ul class="pagination pagination-sm">
 	<c:if test="${page.number > 1}">

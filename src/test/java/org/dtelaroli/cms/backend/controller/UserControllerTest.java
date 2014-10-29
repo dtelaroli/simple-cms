@@ -7,12 +7,12 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.caelum.vraptor.plus.api.Action;
+import br.com.caelum.vraptor.actions.api.Act;
 
 public class UserControllerTest {
 
 	private UserController controller;
-	@Mock private Action action;
+	@Mock private Act action;
 	
 	@Before
 	public void setUp() throws Exception {

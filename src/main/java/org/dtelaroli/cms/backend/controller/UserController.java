@@ -1,10 +1,10 @@
 package org.dtelaroli.cms.backend.controller;
 
-import static br.com.caelum.vraptor.plus.api.Actions.delete;
-import static br.com.caelum.vraptor.plus.api.Actions.list;
-import static br.com.caelum.vraptor.plus.api.Actions.load;
-import static br.com.caelum.vraptor.plus.api.Actions.pagination;
-import static br.com.caelum.vraptor.plus.api.Actions.persist;
+import static br.com.caelum.vraptor.actions.api.Actions.delete;
+import static br.com.caelum.vraptor.actions.api.Actions.list;
+import static br.com.caelum.vraptor.actions.api.Actions.load;
+import static br.com.caelum.vraptor.actions.api.Actions.pagination;
+import static br.com.caelum.vraptor.actions.api.Actions.persist;
 import static br.com.caelum.vraptor.view.Results.referer;
 
 import java.util.List;
@@ -21,8 +21,8 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
-import br.com.caelum.vraptor.plus.api.Act;
-import br.com.caelum.vraptor.plus.api.db.pagination.Page;
+import br.com.caelum.vraptor.actions.api.Act;
+import br.com.caelum.vraptor.actions.api.db.pagination.Page;
 
 /**
  * Created by denilson on 14/10/14.
@@ -89,7 +89,7 @@ public class UserController {
 	
 	@Delete("/{id}")
 	public void remove(Long id) {
-		act.as(delete()).by(User.class, id).andRedirectTo(getClass()).paginate(1);
+		act.as(delete()).by(User.class, id).andRedirectTo(getClass()).paginate();
 	}
 	
 }
