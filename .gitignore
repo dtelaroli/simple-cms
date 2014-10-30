@@ -20,3 +20,6 @@ simple-cms.iml
 target/
 src/main/webapp/js/lib
 .externalToolBuilders
+.settings/
+.classpath
+.project
