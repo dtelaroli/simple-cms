@@ -15,12 +15,12 @@
 	</c:if>
 	<c:if test="${page.hasPrev()}">
 		<li>
-			<a href="${linkTo[UserController].paginate(page.prev)}">&lt;</a>
+			<a href="${linkTo[UserController].paginate(page.prev)}">&lsaquo;</a>
 		</li>
 	</c:if>
 	<c:if test="${not page.hasPrev()}">
 		<li class="disabled">
-			<a>&lt;</a>
+			<a>&lsaquo;</a>
 		</li>
 	</c:if>
 	<c:forEach var="i" begin="1" end="${page.last}">
@@ -37,12 +37,12 @@
 	</c:forEach>
 	<c:if test="${page.hasNext()}">
 		<li>
-			<a href="${linkTo[UserController].paginate(page.next)}">&gt;</a>
+			<a href="${linkTo[UserController].paginate(page.next)}">&rsaquo;</a>
 		</li>
 	</c:if>
 	<c:if test="${not page.hasNext()}">
 		<li class="disabled">
-			<a>&gt;</a>
+			<a>&rsaquo;</a>
 		</li>
 	</c:if>
 	<c:if test="${page.number < page.last}">
