@@ -1,10 +1,10 @@
 package org.dtelaroli.cms.backend.controller;
 
-import static br.com.caelum.vraptor.actions.api.Actions.delete;
-import static br.com.caelum.vraptor.actions.api.Actions.list;
-import static br.com.caelum.vraptor.actions.api.Actions.load;
-import static br.com.caelum.vraptor.actions.api.Actions.pagination;
-import static br.com.caelum.vraptor.actions.api.Actions.persist;
+import static br.com.caelum.vraptor.actions.api.Acts.delete;
+import static br.com.caelum.vraptor.actions.api.Acts.list;
+import static br.com.caelum.vraptor.actions.api.Acts.load;
+import static br.com.caelum.vraptor.actions.api.Acts.pagination;
+import static br.com.caelum.vraptor.actions.api.Acts.persist;
 import static br.com.caelum.vraptor.view.Results.referer;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class UserController {
 	}
 
 	public List<User> index() {
-		act.result().include("foo", "bar");
+//		act.result().include("foo", "bar");
 		return act.as(list()).all(User.class);
 	}
 	
