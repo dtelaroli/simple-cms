@@ -1,30 +1,25 @@
-package org.dtelaroli.cms.backend.model;
+package org.dtelaroli.cms.domain.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-import com.avaje.ebean.Model;
-
 @Entity
-public class User extends Model {
+public class Tag {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
+	@Column(length = 40)
 	private String name;
-
-	public User() {
+	
+	public Tag() {
 	}
 	
-	public User(long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +34,11 @@ public class User extends Model {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Tag [id=" + id + ", name=" + name + "]";
 	}
 	
 }

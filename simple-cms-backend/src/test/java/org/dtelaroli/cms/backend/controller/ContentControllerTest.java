@@ -9,7 +9,7 @@ import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
-import org.dtelaroli.cms.domain.model.User;
+import org.dtelaroli.cms.domain.model.Content;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,69 +18,56 @@ import br.com.caelum.vraptor.actions.api.db.pagination.Page;
 import br.com.caelum.vraptor.actions.api.test.MockAct;
 import br.com.caelum.vraptor.util.test.MockResult;
 
-public class UserControllerTest {
+public class ContentControllerTest {
 
-	private UserController controller;
+	private ContentController controller;
 	private MockAct act;
-	private User user;
+	private Content content;
 	private Result result;
-	private Class<?> c = UserController.class;
+	private Class<?> c = ContentController.class;
 	
 	@Before
 	public void setUp() throws Exception {
-		user = new User(1L, "Foo");
+		content = new Content();
+		content.setId(1L);
+		content.setTitle("Title");
+		content.setBody("Body");
 		result = spy(new MockResult());
-		act = new MockAct(result).returning(user);
-		controller = new UserController(act);
+		act = new MockAct(result).returning(content);
+		controller = new ContentController(act);
 	}
 
 	@Test
 	public void shouldReturnPage() {
-		Page<User> paginate = controller.paginate();
+		Page<Content> paginate = controller.index();
 		
-		List<User> list = paginate.getList();
-		User user = list.get(0);
+		List<Content> list = paginate.getList();
+		Content user = list.get(0);
 
 		assertThat(paginate, instanceOf(Page.class));
 		assertThat(paginate.getPageSize(), equalTo(1));
 		assertThat(user.getId(), equalTo(1L));
-		assertThat(user.getName(), equalTo("Foo"));
+		assertThat(user.getTitle(), equalTo("Title"));
 	}
 
 	@Test
-	public void shouldReturnListOnIndex() {
-		List<User> list = controller.index();
+	public void shouldReturnContentOnEdit() {
+		Content content = controller.edit(1L);
 		
-		assertThat(list, notNullValue());
-		assertThat(list.get(0).getId(), equalTo(1L));
-	}
-	
-	@Test
-	public void shouldReturnUserOnView() {
-		User user = controller.view(1L);
-		
-		assertThat(user, notNullValue());
-		assertThat(user.getId(), equalTo(1L));
-	}
-	
-	@Test
-	public void shouldReturnUserOnEdit() {
-		User user = controller.edit(1L);
-		
-		assertThat(user, notNullValue());
-		assertThat(user.getId(), equalTo(1L));
+		assertThat(content, notNullValue());
+		assertThat(content.getId(), equalTo(1L));
 	}
 	
 	@Test
 	public void shouldRedirectOnUpdate() {
-		controller.update(user);
+		controller.update(content);
 		
 		verify(result).redirectTo(c);
 	}
 	
 	@Test
 	public void shouldRedirectOnInsert() {
-		controller.insert(user);
+		controller.insert(content);
 		
 		verify(result).redirectTo(c);
 	}

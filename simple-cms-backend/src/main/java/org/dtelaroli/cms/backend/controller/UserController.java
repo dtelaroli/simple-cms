@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.dtelaroli.cms.backend.model.User;
+import org.dtelaroli.cms.domain.model.User;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
