@@ -45,7 +45,6 @@ public class UserController {
 	}
 
 	public List<User> index() {
-//		act.result().include("foo", "bar");
 		return act.as(list()).all(User.class);
 	}
 	
@@ -72,9 +71,9 @@ public class UserController {
 	}
 	
 	@Post
-	public void insert(@NotNull @Valid User user) throws Exception {
+	public void insert(@NotNull @Valid User user) {
 		onErrorRedirect();
-		act.as(persist()).insert(user).andRedirectTo(this).view(user.getId());
+		act.as(persist()).insert(user).redirectTo(this).view(user.getId());
 	}
 
 	private void onErrorRedirect() {
@@ -82,14 +81,14 @@ public class UserController {
 	}
 	
 	@Put("/{id}")
-	public void update(@NotNull @Valid User user) throws Exception {
+	public void update(@NotNull @Valid User user) {
 		onErrorRedirect();
-		act.as(persist()).update(user).andRedirectTo(this).view(user.getId());
+		act.as(persist()).update(user).redirectTo(this).view(user.getId());
 	}
 	
 	@Delete("/{id}")
 	public void remove(Long id) {
-		act.as(delete()).by(User.class, id).andRedirectTo(this).paginate();
+		act.as(delete()).by(User.class, id).redirectTo(this).paginate();
 	}
 	
 }

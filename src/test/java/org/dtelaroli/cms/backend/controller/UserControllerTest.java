@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
@@ -11,19 +13,23 @@ import org.dtelaroli.cms.backend.model.User;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.actions.api.db.pagination.Page;
 import br.com.caelum.vraptor.actions.api.test.MockAct;
+import br.com.caelum.vraptor.util.test.MockResult;
 
 public class UserControllerTest {
 
 	private UserController controller;
 	private MockAct act;
 	private User user;
+	private Result result;
 	
 	@Before
 	public void setUp() throws Exception {
-		act = new MockAct().returning(new User(1L, "Foo"));
 		user = new User(1L, "Foo");
+		result = spy(new MockResult());
+		act = new MockAct(result).returning(user);
 		controller = new UserController(act);
 	}
 
@@ -50,7 +56,6 @@ public class UserControllerTest {
 	
 	@Test
 	public void shouldReturnUserOnView() {
-		act.returning(user);
 		User user = controller.view(1L);
 		
 		assertThat(user, notNullValue());
@@ -59,10 +64,30 @@ public class UserControllerTest {
 	
 	@Test
 	public void shouldReturnUserOnEdit() {
-		act.returning(user);
 		User user = controller.edit(1L);
 		
 		assertThat(user, notNullValue());
 		assertThat(user.getId(), equalTo(1L));
+	}
+	
+	@Test
+	public void shouldRedirectOnUpdate() {
+		controller.update(user);
+		
+		verify(result).redirectTo(UserController.class);
+	}
+	
+	@Test
+	public void shouldRedirectOnInsert() {
+		controller.insert(user);
+		
+		verify(result).redirectTo(UserController.class);
+	}
+	
+	@Test
+	public void shouldRedirectOnRemove() {
+		controller.remove(1L);
+		
+		verify(result).redirectTo(UserController.class);
 	}
 }
