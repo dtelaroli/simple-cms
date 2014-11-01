@@ -45,28 +45,25 @@ public class UserController {
 		return index(1);
 	}
 	
-	@Get("/paginate/{page}")
-	public Page<User> index(int page) {
+	@Get("/index/{page}")
+	public Page<User> index(@NotNull Integer page) {
+		onErrorRedirect();
 		return act.as(pagination()).page(page).limit(2).paginate(User.class);
-	}
-	
-	@Get("/{id}")
-	public User view(Long id) {
-		return act.as(load()).by(User.class, id);
 	}
 	
 	public void add() {
 	}
 	
 	@Get("/{id}/edit")
-	public User edit(Long id) {
+	public User edit(@NotNull Long id) {
+		onErrorRedirect();
 		return act.as(load()).by(User.class, id);
 	}
 	
 	@Post
 	public void insert(@NotNull @Valid User user) {
 		onErrorRedirect();
-		act.as(persist()).insert(user).redirectTo(this).view(user.getId());
+		act.as(persist()).insert(user).redirectTo(this).edit(user.getId());
 	}
 
 	private void onErrorRedirect() {
@@ -76,11 +73,12 @@ public class UserController {
 	@Put("/{id}")
 	public void update(@NotNull @Valid User user) {
 		onErrorRedirect();
-		act.as(persist()).update(user).redirectTo(this).view(user.getId());
+		act.as(persist()).update(user).redirectTo(this).edit(user.getId());
 	}
 	
 	@Delete("/{id}")
-	public void remove(Long id) {
+	public void remove(@NotNull Long id) {
+		onErrorRedirect();
 		act.as(delete()).by(User.class, id).redirectTo(this).index();
 	}
 	

@@ -36,7 +36,7 @@ public class UserControllerTest {
 
 	@Test
 	public void shouldReturnPage() {
-		Page<User> paginate = controller.paginate();
+		Page<User> paginate = controller.index();
 		
 		List<User> list = paginate.getList();
 		User user = list.get(0);
@@ -47,22 +47,6 @@ public class UserControllerTest {
 		assertThat(user.getName(), equalTo("Foo"));
 	}
 
-	@Test
-	public void shouldReturnListOnIndex() {
-		List<User> list = controller.index();
-		
-		assertThat(list, notNullValue());
-		assertThat(list.get(0).getId(), equalTo(1L));
-	}
-	
-	@Test
-	public void shouldReturnUserOnView() {
-		User user = controller.view(1L);
-		
-		assertThat(user, notNullValue());
-		assertThat(user.getId(), equalTo(1L));
-	}
-	
 	@Test
 	public void shouldReturnUserOnEdit() {
 		User user = controller.edit(1L);

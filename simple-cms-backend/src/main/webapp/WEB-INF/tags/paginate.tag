@@ -1,11 +1,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ attribute name="controller" required="true" type="java.lang.Object" %>
-<%@ attribute name="page" required="true" type="java.lang.Object" %>
+<%@ attribute name="controller" type="java.lang.Object" %>
+<%@ attribute name="action" %>
+<%@ attribute name="pageObject" type="java.lang.Object" %>
+
+<c:set var="controller" value="${empty controller ? requestInfo.controller : controller}"/>
+<c:set var="action" value="${empty action ? requestInfo.action : action}"/>
+<c:set var="page" value="${empty pageObject ? page : pageObject}"/>
 
 <ul class="pagination pagination-sm">
 	<c:if test="${page.number > 1}">
 		<li>
-			<a href="${linkTo[controller].index}">&laquo;</a>
+			<a href="${linkTo[controller].index()}">&laquo;</a>
 		</li>
 	</c:if>
 	<c:if test="${page.number eq 1}">
