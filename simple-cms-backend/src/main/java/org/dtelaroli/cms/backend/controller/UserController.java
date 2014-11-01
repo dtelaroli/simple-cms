@@ -29,7 +29,7 @@ public class UserController {
 	private final Act act;
 
 	/**
-	 * @deprecated
+	 * @deprecated CDI eyes-only
 	 */
 	protected UserController() {
 		this(null);

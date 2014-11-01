@@ -22,6 +22,10 @@ public class Content {
 	@Column(length = 255)
 	private String title;
 	
+	@NotNull
+	@Column(length = 1024)
+	private String summary;
+	
 	@Lob
 	private String body;
 	
@@ -74,6 +78,14 @@ public class Content {
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 	
 }

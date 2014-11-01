@@ -4,11 +4,19 @@ import static br.com.caelum.vraptor.actions.api.Acts.delete;
 import static br.com.caelum.vraptor.actions.api.Acts.load;
 import static br.com.caelum.vraptor.actions.api.Acts.pagination;
 import static br.com.caelum.vraptor.actions.api.Acts.persist;
+import static br.com.caelum.vraptor.view.Results.referer;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.dtelaroli.cms.domain.model.Content;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.actions.api.Act;
 import br.com.caelum.vraptor.actions.api.db.pagination.Page;
 
@@ -17,10 +25,14 @@ public class ContentController {
 
 	private final Act act;
 
+	/**
+	 * @deprecated CDI eyes-only
+	 */
 	protected ContentController() {
 		this(null);
 	}
 	
+	@Inject
 	public ContentController(Act act) {
 		this.act = act;
 	}
@@ -30,24 +42,40 @@ public class ContentController {
 	}
 
 	@Get("/index/{page}")
-	public Page<Content> index(int page) {
+	public Page<Content> index(@NotNull Integer page) {
+		onErrorRedirect();
 		return act.as(pagination()).page(page).paginate(Content.class);
 	}
+	
+	public void add() {
+		
+	}
 
-	public Content edit(Long id) {
+	@Get("/{id}")
+	public Content edit(@NotNull @Valid Long id) {
+		onErrorRedirect();
 		return act.as(load()).by(Content.class, id);
 	}
 
-	public void update(Content content) {
+	@Put("/{content.id}")
+	public void update(@NotNull @Valid Content content) {
+		onErrorRedirect();
 		act.as(persist()).update(content).redirectTo(this).edit(content.getId());
 	}
 
-	public void insert(Content content) {
+	@Post
+	public void insert(@NotNull @Valid Content content) {
+		onErrorRedirect();
 		act.as(persist()).insert(content).redirectTo(this).edit(content.getId());		
 	}
 
-	public void remove(Long id) {
+	@Delete("/{id}")
+	public void remove(@NotNull Long id) {
+		onErrorRedirect();
 		act.as(delete()).by(Content.class, id).redirectTo(this).index();		
 	}
 
+	private void onErrorRedirect() {
+		act.validator().onErrorUse(referer()).redirect();
+	}
 }

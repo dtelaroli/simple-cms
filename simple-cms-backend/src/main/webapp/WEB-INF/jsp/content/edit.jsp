@@ -1,0 +1,1 @@
+<cms:form action="${linkTo[requestInfo.controller].update(content)}" method="put"/>
