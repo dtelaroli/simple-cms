@@ -1,13 +1,10 @@
 package org.dtelaroli.cms.backend.controller;
 
 import static br.com.caelum.vraptor.actions.api.Acts.delete;
-import static br.com.caelum.vraptor.actions.api.Acts.list;
 import static br.com.caelum.vraptor.actions.api.Acts.load;
 import static br.com.caelum.vraptor.actions.api.Acts.pagination;
 import static br.com.caelum.vraptor.actions.api.Acts.persist;
 import static br.com.caelum.vraptor.view.Results.referer;
-
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -44,16 +41,12 @@ public class UserController {
 		this.act = act;
 	}
 
-	public List<User> index() {
-		return act.as(list()).all(User.class);
-	}
-	
-	public Page<User> paginate() {
-		return paginate(1);
+	public Page<User> index() {
+		return index(1);
 	}
 	
 	@Get("/paginate/{page}")
-	public Page<User> paginate(int page) {
+	public Page<User> index(int page) {
 		return act.as(pagination()).page(page).limit(2).paginate(User.class);
 	}
 	
@@ -88,7 +81,7 @@ public class UserController {
 	
 	@Delete("/{id}")
 	public void remove(Long id) {
-		act.as(delete()).by(User.class, id).redirectTo(this).paginate();
+		act.as(delete()).by(User.class, id).redirectTo(this).index();
 	}
 	
 }
