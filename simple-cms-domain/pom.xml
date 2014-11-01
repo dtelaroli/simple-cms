@@ -40,16 +40,6 @@
 			<version>${weld.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.avaje.ebeanorm</groupId>
-			<artifactId>avaje-ebeanorm</artifactId>
-			<version>${ebean.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.avaje.ebeanorm</groupId>
-			<artifactId>avaje-ebeanorm-agent</artifactId>
-			<version>${ebean.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>br.com.caelum.vraptor</groupId>
 			<artifactId>actions-db-ebean</artifactId>
 			<version>${project.version}</version>
@@ -58,22 +48,6 @@
 			<groupId>org.sitemesh</groupId>
 			<artifactId>sitemesh</artifactId>
 			<version>3.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-tools</artifactId>
-			<version>2.0</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>servlet-api</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -119,7 +93,7 @@
 						</goals>
 						<configuration>
 							<packages>org.dtelaroli.cms.domain.model.**</packages>
-							<transformArgs>debug=1;transientInternalFields=true</transformArgs>
+							<transformArgs>debug=1</transformArgs>
 							<classSource>${project.build.outputDirectory}</classSource>
 							<classDestination>${project.build.outputDirectory}</classDestination>
 						</configuration>
@@ -127,38 +101,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.avaje.ebeanorm</groupId>
-										<artifactId>avaje-ebeanorm-mavenenhancer</artifactId>
-										<versionRange>[${ebean.version},)</versionRange>
-										<goals>
-											<goal>enhance</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute>
-											<runOnConfiguration>true</runOnConfiguration>
-											<runOnIncremental>true</runOnIncremental>
-										</execute>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 </project>

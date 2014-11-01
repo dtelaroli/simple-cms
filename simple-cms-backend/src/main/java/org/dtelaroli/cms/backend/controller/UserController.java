@@ -16,7 +16,6 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
-import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.actions.api.Act;
 import br.com.caelum.vraptor.actions.api.db.pagination.Page;
@@ -60,7 +59,6 @@ public class UserController {
 		return act.as(load()).by(User.class, id);
 	}
 	
-	@Post
 	public void insert(@NotNull @Valid User user) {
 		onErrorRedirect();
 		act.as(persist()).insert(user).redirectTo(this).edit(user.getId());
@@ -70,7 +68,7 @@ public class UserController {
 		act.validator().onErrorUse(referer()).redirect();
 	}
 	
-	@Put("/{id}")
+	@Put("/{user.id}")
 	public void update(@NotNull @Valid User user) {
 		onErrorRedirect();
 		act.as(persist()).update(user).redirectTo(this).edit(user.getId());

@@ -1,3 +1,1 @@
-<form role="form" action="${linkTo[UserController].insert()}" method="post">
-	<jsp:include page="./form.jsp"></jsp:include>
-</form>
+<cms:form action="${linkTo[requestInfo.controller].insert()}" method="post"/>
