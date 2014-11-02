@@ -1,5 +1,15 @@
 <div class="col-md-8">
 	<div class="form-group">
+		<label for="createdAt">Created</label>
+		<input type="text" id="createdAt" value="${content.createdAt.time}" disabled>
+	</div>
+
+	<div class="form-group">
+		<label for="updatedAt">Updated</label>
+		<input type="text" id="updatedAt" value="${content.updatedAt.time}" disabled>
+	</div>
+	
+	<div class="form-group">
 		<label for="title">Title</label>
 		<input type="text" class="form-control" id="title" name="content.title" value="${content.title}"
 			placeholder="Enter title">

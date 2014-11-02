@@ -15,12 +15,13 @@ import org.dtelaroli.cms.domain.model.Content;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.actions.api.Act;
 import br.com.caelum.vraptor.actions.api.db.pagination.Page;
 
-@Controller
+@Controller @Path("/content")
 public class ContentController {
 
 	private final Act act;

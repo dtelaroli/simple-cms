@@ -4,21 +4,16 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Content {
+public class Content extends Model {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotNull
+	private static final long serialVersionUID = 1885202008039612248L;
+
 	@Column(length = 255)
 	private String title;
 	
@@ -28,6 +23,8 @@ public class Content {
 	
 	@Lob
 	private String body;
+	
+	private boolean published;
 	
 	@ManyToMany
 	@Valid
@@ -40,14 +37,6 @@ public class Content {
 	public Content() {
 	}
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -87,5 +76,13 @@ public class Content {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
-	
+
+	public boolean isPublished() {
+		return published;
+	}
+
+	public void setPublished(boolean published) {
+		this.published = published;
+	}
+
 }
