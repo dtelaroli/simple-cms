@@ -18,7 +18,7 @@ hs_err_pid*
 **/target
 simple-cms.iml
 target/
-src/main/webapp/js/lib
+**/src/main/webapp/js/lib
 .externalToolBuilders
 .settings/
 .classpath

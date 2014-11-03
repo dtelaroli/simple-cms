@@ -38,6 +38,7 @@ public class ContentController {
 		this.act = act;
 	}
 
+	@Get
 	public Page<Content> index() {
 		return index(1);
 	}
@@ -48,6 +49,7 @@ public class ContentController {
 		return act.as(pagination()).page(page).paginate(Content.class);
 	}
 	
+	@Get
 	public void add() {
 		
 	}
@@ -58,16 +60,10 @@ public class ContentController {
 		return act.as(load()).by(Content.class, id);
 	}
 
-	@Put("/{content.id}")
-	public void update(@NotNull @Valid Content content) {
+	@Post("/") @Put("/{content.id}")
+	public void save(@NotNull @Valid Content content) {
 		onErrorRedirect();
-		act.as(persist()).update(content).redirectTo(this).edit(content.getId());
-	}
-
-	@Post
-	public void insert(@NotNull @Valid Content content) {
-		onErrorRedirect();
-		act.as(persist()).insert(content).redirectTo(this).edit(content.getId());		
+		act.as(persist()).save(content).redirectTo(this).edit(content.getId());
 	}
 
 	@Delete("/{id}")

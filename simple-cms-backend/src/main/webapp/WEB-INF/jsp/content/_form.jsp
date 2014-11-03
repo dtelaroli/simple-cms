@@ -1,18 +1,22 @@
 <div class="col-md-8">
 	<div class="form-group">
 		<label for="title">Title</label>
-		<input type="text" class="form-control" id="title" name="content.title" value="${content.title}"
+		<input type="text" class="form-control" id="title"
+			name="content.title" value="${content.title}"
 			placeholder="Enter title">
+		<input type="hidden" name="content.id" value="${content.id}"/>			
 	</div>
 
 	<div class="form-group">
 		<label for="summary">Summary</label>
-		<textarea class="form-control" id="summary" name="content.summary" placeholder="Enter summary">${content.summary}</textarea>
+		<textarea class="form-control" id="summary" name="content.summary"
+			placeholder="Enter summary">${content.summary}</textarea>
 	</div>
 
 	<div class="form-group">
 		<label for="body">Body</label>
-		<textarea class="form-control" id="body" name="content.body" placeholder="Enter body">${content.body}</textarea>
+		<textarea class="form-control" id="body" name="content.body"
+			placeholder="Enter body">${content.body}</textarea>
 	</div>
 
 	<button class="btn btn-default">Save</button>
@@ -29,7 +33,7 @@
 				${content.createdAt.time}
 			</div>
 			<div class="form-group">
-				<label for="updatedAt">Last updated</label>
+				<label for="updatedAt">Last update</label>
 				${content.updatedAt.time}
 			</div>
 			<div class="form-group">
@@ -59,10 +63,10 @@
 					Option 2
 				</label>
 			</div>
-			<div class="input-group">
+			<div class="input-group input-group-sm">
 				<input type="text" class="form-control" placeholder="Add new">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">Save</button>
+					<button class="btn btn-default" type="button">Add</button>
 				</span>
 			</div>
 			<!-- /input-group -->
@@ -85,13 +89,20 @@
 					Option 2
 				</label>
 			</div>
-			<div class="input-group">
+			<div class="input-group input-group-sm">
 				<input type="text" class="form-control" placeholder="Add new">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">Save</button>
+					<button class="btn btn-default" type="button">Add</button>
 				</span>
 			</div>
 			<!-- /input-group -->
 		</div>
 	</div>
 </div>
+
+<cms:js />
+<script>
+	tinymce.init({
+		selector : '#body'
+	});
+</script>

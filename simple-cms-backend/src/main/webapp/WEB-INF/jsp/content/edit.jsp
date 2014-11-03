@@ -1,1 +1,1 @@
-<cms:form action="${linkTo[requestInfo.controller].update(content)}" method="put"/>
+<cms:form action="${linkTo[requestInfo.controller].save(content)}" method="put"/>

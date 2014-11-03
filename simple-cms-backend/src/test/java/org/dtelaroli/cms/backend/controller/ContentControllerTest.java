@@ -60,14 +60,7 @@ public class ContentControllerTest {
 	
 	@Test
 	public void shouldRedirectOnUpdate() {
-		controller.update(content);
-		
-		verify(result).redirectTo(c);
-	}
-	
-	@Test
-	public void shouldRedirectOnInsert() {
-		controller.insert(content);
+		controller.save(content);
 		
 		verify(result).redirectTo(c);
 	}

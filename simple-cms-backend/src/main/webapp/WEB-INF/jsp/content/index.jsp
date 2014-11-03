@@ -27,5 +27,6 @@
 	</table>
 
 	<cms:paginate />
+	<cms:js/>
 </body>
 </html>
