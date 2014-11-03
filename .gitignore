@@ -25,3 +25,4 @@ target/
 .project
 **/h2*.sql
 h2*.sql
+**/*.db
