@@ -1,14 +1,14 @@
-package org.dtelaroli.cms.backend;
+package org.dtelaroli.simple.cms.base.component;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Named;
 
 import br.com.caelum.vraptor.controller.BeanClass;
 import br.com.caelum.vraptor.events.ControllerFound;
 
-@Named("requestInfo")
-@RequestScoped
+@Named("info")
+@ApplicationScoped
 public class RequestInfo {
 
 	private BeanClass controller;
@@ -21,7 +21,7 @@ public class RequestInfo {
 		controller = controllerFound.getController();
 		action = controllerFound.getMethod().getMethod().getName();
 	}
-
+	
 	public BeanClass getController() {
 		return controller;
 	}

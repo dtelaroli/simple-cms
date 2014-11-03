@@ -15,6 +15,7 @@ public class Content extends Model {
 	private static final long serialVersionUID = 1885202008039612248L;
 
 	@Column(length = 255)
+	@NotNull
 	private String title;
 	
 	@NotNull
@@ -24,6 +25,7 @@ public class Content extends Model {
 	@Lob
 	private String body;
 	
+	@NotNull
 	private boolean published;
 	
 	@ManyToMany

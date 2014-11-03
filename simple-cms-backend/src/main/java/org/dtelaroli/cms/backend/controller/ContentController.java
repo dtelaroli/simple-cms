@@ -50,8 +50,8 @@ public class ContentController {
 	}
 	
 	@Get
-	public void add() {
-		
+	public void add() throws Exception {
+		throw new Exception("ff");
 	}
 
 	@Get("/{id}")
