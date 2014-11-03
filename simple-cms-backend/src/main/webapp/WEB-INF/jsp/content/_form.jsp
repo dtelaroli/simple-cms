@@ -1,15 +1,5 @@
 <div class="col-md-8">
 	<div class="form-group">
-		<label for="createdAt">Created</label>
-		<input type="text" id="createdAt" value="${content.createdAt.time}" disabled>
-	</div>
-
-	<div class="form-group">
-		<label for="updatedAt">Updated</label>
-		<input type="text" id="updatedAt" value="${content.updatedAt.time}" disabled>
-	</div>
-	
-	<div class="form-group">
 		<label for="title">Title</label>
 		<input type="text" class="form-control" id="title" name="content.title" value="${content.title}"
 			placeholder="Enter title">
@@ -31,7 +21,56 @@
 <div class="col-md-4">
 	<div class="panel panel-default">
 		<div class="panel-heading">
+			<h3 class="panel-title">Content properties</h3>
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label for="createdAt">Created at</label>
+				${content.createdAt.time}
+			</div>
+			<div class="form-group">
+				<label for="updatedAt">Last updated</label>
+				${content.updatedAt.time}
+			</div>
+			<div class="form-group">
+				<c:if test="${content.published}">
+					<button class="btn btn-default" type="button">Draft</button>
+				</c:if>
+				<c:if test="${not content.published}">
+					<button class="btn btn-default" type="button">Publish</button>
+				</c:if>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
 			<h3 class="panel-title">Categories</h3>
+		</div>
+		<div class="panel-body">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" value="">
+					Option 1
+				</label>
+			</div>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" value="">
+					Option 2
+				</label>
+			</div>
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Add new">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Save</button>
+				</span>
+			</div>
+			<!-- /input-group -->
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Tags</h3>
 		</div>
 		<div class="panel-body">
 			<div class="checkbox">
