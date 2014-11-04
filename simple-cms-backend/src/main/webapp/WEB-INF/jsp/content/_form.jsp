@@ -8,7 +8,7 @@
 	margin-top: 20px;
 }
 </style>
-
+<cms:js />
 <div class="col-md-9">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -65,123 +65,42 @@
 		</div>
 	</c:if>
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">Categories</h3>
-		</div>
-		<div class="panel-body">
-			<c:forEach var="category" items="${categoryList}">
-				<div class="checkbox">
-					<label> <input type="checkbox"
-						name="content.categories[].id" value="${category.id}"
-						${content.categories.contains(category) ? 'checked': ''}>
-						${category.name}
-					</label>
-				</div>
-			</c:forEach>
-			<div id="categoryContainer"></div>
-			<div class="input-group input-group-sm">
-				<input type="text" id="category" class="form-control"
-					placeholder="Add new category"> <span
-					class="input-group-btn">
-					<button class="btn btn-default" type="button"
-						onclick="addCategory()">Add</button>
-				</span>
-			</div>
-		</div>
-	</div>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">Tags</h3>
-		</div>
-		<div class="panel-body">
-			<c:forEach var="tag" items="${tagList}">
-				<div class="checkbox">
-					<label> <input type="checkbox" name="content.tags[].id"
-						value="${tag.id}" ${content.tags.contains(tag) ? 'checked': ''}>
-						${tag.name}
-					</label>
-				</div>
-			</c:forEach>
-			<div id="tagContainer"></div>
-			<div class="input-group input-group-sm">
-				<input type="text" id="tag" class="form-control"
-					placeholder="Add new tag"> <span class="input-group-btn">
-					<button class="btn btn-default" type="button" onclick="addTag()">Add</button>
-				</span>
-			</div>
-		</div>
-	</div>
+	<cms:relatedBox listSaved="${content.categories}" controller="${CategoryController}" 
+		inputName="content.categories[].id" name="category" listAll="${categoryList}" title="Categories"/>
+		
+	<cms:relatedBox listSaved="${content.tags}" controller="${TagController}" 
+		inputName="content.tags[].id" name="tag" listAll="${tagList}" title="Tags"/>
+		
 </div>
 
-<cms:js />
 <script>
 	tinymce.init({
 		selector : '#body',
 		height : 500
 	});
 
-	function addTag() {
-		var tagName = $('#tag').val();
-		var json = JSON.stringify({
-			tag : {
-				name : tagName
-			}
-		});
+	function add(name, url) {
+		var nameObj= $('#' + name + 'Input').val();
+		var obj = {};
+		obj[name] = {
+			name : nameObj
+		};
+		
 		$.ajax({
-			url : '${linkTo[TagController].save}',
+			url : url,
 			type : 'post',
 			dataType : 'json',
 			contentType : 'application/json',
-			data : json,
+			data : JSON.stringify(obj),
 			success : function(result) {
-				var tagTmpl = $.templates("#tagTmpl");
-				var html = tagTmpl.render(result);
-				$('#tagContainer').append(html);
+				var tmpl = $.templates('#' + name + 'Tmpl');
+				var html = tmpl.render(result);
+				$('#' + name + 'Container').append(html);
+				$('#' + name + 'Input').val('');
 			},
 			error : function(result) {
 				console.log('e', result)
 			}
 		});
 	}
-
-	function addCategory() {
-		var categoryName = $('#category').val();
-		var json = JSON.stringify({
-			category : {
-				name : categoryName
-			}
-		});
-		$.ajax({
-			url : '${linkTo[CategoryController].save}',
-			type : 'post',
-			dataType : 'json',
-			contentType : 'application/json',
-			data : json,
-			success : function(result) {
-				var categoryTmpl = $.templates("#categoryTmpl");
-				var html = categoryTmpl.render(result);
-				$('#categoryContainer').append(html);
-			},
-			error : function(result) {
-				console.log('e', result)
-			}
-		});
-	}
-</script>
-<script id="tagTmpl" type="text/x-jsrender">
-	<div class="checkbox">
-		<label>
-			<input type="checkbox" name="content.tags[].id" value="{{:id}}" checked>
-			{{:name}}
-		</label>
-	</div>
-</script>
-<script id="categoryTmpl" type="text/x-jsrender">
-	<div class="checkbox">
-		<label>
-			<input type="checkbox" name="content.categories[].id" value="{{:id}}" checked>
-			{{:name}}
-		</label>
-	</div>
 </script>
