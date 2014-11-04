@@ -1,1 +1,1 @@
-<cms:form action="${linkTo[requestInfo.controller].insert()}" method="post"/>
+<cms:form action="${linkTo[info.controller].insert()}" method="post"/>

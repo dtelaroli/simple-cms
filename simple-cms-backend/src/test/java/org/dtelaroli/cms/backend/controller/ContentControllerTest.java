@@ -46,10 +46,7 @@ public class ContentControllerTest {
 		category.setName("Category");
 		
 		result = spy(new MockResult());
-		act = new MockAct(result)
-			.returning(content)
-			.returning(tag)
-			.returning(category);
+		act = new MockAct(result).returning(content, tag, category);
 		
 		controller = new ContentController(act);
 	}

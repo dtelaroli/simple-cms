@@ -4,7 +4,7 @@
 </head>
 <body>
 	<h2>Users</h2>
-	<a href="${linkTo[requestInfo.controller].add()}" class="btn btn-default">New User</a>
+	<a href="${linkTo[info.controller].add()}" class="btn btn-default">New User</a>
 
 	<table class="table table-condensed table-hover table-striped table-responsive">
 		<thead>
@@ -20,8 +20,8 @@
 					<td>${user.id}</td>
 					<td>${user.name}</td>
 					<td>
-						<cms:actions object="${user}" editAction="${linkTo[requestInfo.controller].edit(user.id)}" 
-							removeAction="${linkTo[requestInfo.controller].remove(user.id)}"/>
+						<cms:actions object="${user}" editAction="${linkTo[info.controller].edit(user.id)}" 
+							removeAction="${linkTo[info.controller].remove(user.id)}"/>
 					</td>
 				</tr>
 			</c:forEach>
