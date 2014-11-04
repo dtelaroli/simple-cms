@@ -1,12 +1,12 @@
 package org.dtelaroli.cms.domain.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -29,12 +29,10 @@ public class Content extends Model {
 	private boolean published;
 	
 	@ManyToMany
-	@Valid
-	private List<Tag> tags;
+	private List<Tag> tags = new ArrayList<>();
 
 	@ManyToMany
-	@Valid
-	private List<Category> categories;
+	private List<Category> categories = new ArrayList<>();
 	
 	public Content() {
 	}

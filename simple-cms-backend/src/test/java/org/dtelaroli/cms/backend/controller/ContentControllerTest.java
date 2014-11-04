@@ -10,6 +10,7 @@ import static org.mockito.Mockito.verify;
 import java.util.List;
 
 import org.dtelaroli.cms.domain.model.Content;
+import org.dtelaroli.cms.domain.model.Tag;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -70,5 +71,23 @@ public class ContentControllerTest {
 		controller.remove(1L);
 		
 		verify(result).redirectTo(c);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shouldIncludeTagsOnAdd() {
+		controller.add();
+		
+		List<Tag> list = (List<Tag>)result.included().get("tagList");
+		assertThat(list, notNullValue());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shouldIncludeTagsOnEdit() {
+		controller.edit(1L);
+		
+		List<Tag> list = (List<Tag>)result.included().get("tagList");
+		assertThat(list, notNullValue());
 	}
 }

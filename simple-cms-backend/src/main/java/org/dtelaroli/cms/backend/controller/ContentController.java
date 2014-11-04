@@ -1,16 +1,20 @@
 package org.dtelaroli.cms.backend.controller;
 
 import static br.com.caelum.vraptor.actions.api.Acts.delete;
+import static br.com.caelum.vraptor.actions.api.Acts.list;
 import static br.com.caelum.vraptor.actions.api.Acts.load;
 import static br.com.caelum.vraptor.actions.api.Acts.pagination;
 import static br.com.caelum.vraptor.actions.api.Acts.persist;
 import static br.com.caelum.vraptor.view.Results.referer;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.dtelaroli.cms.domain.model.Content;
+import org.dtelaroli.cms.domain.model.Tag;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
@@ -50,12 +54,19 @@ public class ContentController {
 	}
 	
 	@Get
-	public void add() throws Exception {
+	public void add() {
+		includes();
+	}
+
+	private void includes() {
+		List<Tag> tags = act.as(list()).all(Tag.class);
+		act.result().include("tagList", tags);
 	}
 
 	@Get("/{id}")
 	public Content edit(@NotNull @Valid Long id) {
 		onErrorRedirect();
+		includes();
 		return act.as(load()).by(Content.class, id);
 	}
 

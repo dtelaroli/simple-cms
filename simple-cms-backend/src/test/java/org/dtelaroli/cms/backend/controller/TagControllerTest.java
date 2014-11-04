@@ -37,7 +37,7 @@ public class TagControllerTest {
 		controller.save(tag);
 		
 		verify(act).as(persist());
-		assertThat(result.serializedResult(), containsString("\"tag\":{\"id\":1"));
+		assertThat(result.serializedResult(), containsString("{\"id\":1,\"name\":\"Foo\"}"));
 	}
-
+	
 }

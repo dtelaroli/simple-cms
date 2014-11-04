@@ -77,6 +77,14 @@
 			<h3 class="panel-title">Tags</h3>
 		</div>
 		<div class="panel-body">
+			<c:forEach var="tag" items="${tagList}">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="content.tags[].id" value="${tag.id}" ${content.tags.contains(tag) ? 'checked': ''}>
+						${tag.name}
+					</label>
+				</div>
+			</c:forEach>
 			<div id="tagContainer">
 			</div>
 			<div class="input-group input-group-sm">
@@ -121,7 +129,7 @@
 <script id="tagTmpl" type="text/x-jsrender">
 	<div class="checkbox">
 		<label>
-			<input type="checkbox" value="{{:id}}">
+			<input type="checkbox" name="content.tags[].id" value="{{:id}}" checked>
 			{{:name}}
 		</label>
 	</div>
