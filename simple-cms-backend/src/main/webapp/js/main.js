@@ -9,9 +9,11 @@ var Backend = {
 				data : JSON.stringify(data),
 				success : callback,
 				beforeSend: function() {
-					var tmpl = $.templates('#loader');
-					var html = tmpl.render();
-					$(loader).append(html);
+					if(loader) {
+						var tmpl = $.templates('#loader');
+						var html = tmpl.render();
+						$(loader).append(html);
+					}
 					
 					NProgress.start();
 				},

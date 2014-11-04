@@ -44,9 +44,9 @@
 				</div>
 				<div class="form-group">
 					<button id="draft" class="btn btn-default" type="button" onclick="Content.publish(false)" 
-						style="display: ${content.published ? 'none' : 'block'}">Draft</button>
+						style="display: ${content.published ? 'block' : 'none'}">Draft</button>
 					<button id="publish" class="btn btn-default" type="button" onclick="Content.publish(true)"
-						style="display: ${content.published ? 'block' : 'none'}">Publish</button>
+						style="display: ${content.published ? 'none' : 'block'}">Publish</button>
 				</div>
 			</div>
 		</div>

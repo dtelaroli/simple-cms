@@ -76,7 +76,7 @@ public class ContentController {
 	public Content edit(@NotNull @Valid Long id) {
 		onErrorRedirect();
 		includes();
-		return act.as(load()).by(Content.class, id);
+		return loadById(id);
 	}
 
 	@Post("/") @Put("/{content.id}")
@@ -93,11 +93,15 @@ public class ContentController {
 	
 	@Post @Consumes("application/json")
 	public void publish(Long id, boolean publish) {
-		Content content = edit(id);
+		Content content = loadById(id);
 		content.setPublished(publish);
 		
 		act.as(persist()).save(content);
 		act.result().use(json()).from(content).serialize();
+	}
+
+	private Content loadById(Long id) {
+		return act.as(load()).by(Content.class, id);
 	}
 
 	private void onErrorRedirect() {
