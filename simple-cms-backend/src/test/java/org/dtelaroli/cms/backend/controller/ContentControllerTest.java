@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
+import org.dtelaroli.cms.domain.model.Category;
 import org.dtelaroli.cms.domain.model.Content;
 import org.dtelaroli.cms.domain.model.Tag;
 import org.junit.Before;
@@ -26,6 +27,8 @@ public class ContentControllerTest {
 	private Content content;
 	private Result result;
 	private Class<?> c = ContentController.class;
+	private Tag tag;
+	private Category category;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -33,8 +36,21 @@ public class ContentControllerTest {
 		content.setId(1L);
 		content.setTitle("Title");
 		content.setBody("Body");
+		
+		tag = new Tag();
+		tag.setId(1L);
+		tag.setName("Tag");
+		
+		category = new Category();
+		category.setId(1L);
+		category.setName("Category");
+		
 		result = spy(new MockResult());
-		act = new MockAct(result).returning(content);
+		act = new MockAct(result)
+			.returning(content)
+			.returning(tag)
+			.returning(category);
+		
 		controller = new ContentController(act);
 	}
 
@@ -79,7 +95,16 @@ public class ContentControllerTest {
 		controller.add();
 		
 		List<Tag> list = (List<Tag>)result.included().get("tagList");
-		assertThat(list, notNullValue());
+		assertThat(list.get(0), notNullValue());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shouldIncludeCategoriesOnAdd() {
+		controller.add();
+		
+		List<Category> list = (List<Category>)result.included().get("categoryList");
+		assertThat(list.get(0), notNullValue());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -88,6 +113,15 @@ public class ContentControllerTest {
 		controller.edit(1L);
 		
 		List<Tag> list = (List<Tag>)result.included().get("tagList");
-		assertThat(list, notNullValue());
+		assertThat(list.get(0), notNullValue());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shouldIncludeCategoriesOnEdit() {
+		controller.edit(1L);
+		
+		List<Category> list = (List<Category>)result.included().get("categoryList");
+		assertThat(list.get(0), notNullValue());
 	}
 }

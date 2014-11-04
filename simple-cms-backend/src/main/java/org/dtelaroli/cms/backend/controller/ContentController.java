@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.dtelaroli.cms.domain.model.Category;
 import org.dtelaroli.cms.domain.model.Content;
 import org.dtelaroli.cms.domain.model.Tag;
 
@@ -23,6 +24,7 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.actions.api.Act;
+import br.com.caelum.vraptor.actions.api.action.ListAction;
 import br.com.caelum.vraptor.actions.api.db.pagination.Page;
 
 @Controller @Path("/content")
@@ -59,8 +61,13 @@ public class ContentController {
 	}
 
 	private void includes() {
-		List<Tag> tags = act.as(list()).all(Tag.class);
+		ListAction listAction = act.as(list());
+		
+		List<Tag> tags = listAction.all(Tag.class);
 		act.result().include("tagList", tags);
+		
+		List<Category> categories = listAction.all(Category.class);
+		act.result().include("categoryList", categories);
 	}
 
 	@Get("/{id}")
