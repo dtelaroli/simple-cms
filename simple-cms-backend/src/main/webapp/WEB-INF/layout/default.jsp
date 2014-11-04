@@ -25,5 +25,7 @@
 	<footer class="container">
 		<jsp:include page="/WEB-INF/elements/footer.jsp"></jsp:include>
 	</footer>
+	
+	<cms:loader/>
 </body>
 </html>

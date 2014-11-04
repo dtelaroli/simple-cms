@@ -5,6 +5,7 @@ import static br.com.caelum.vraptor.actions.api.Acts.list;
 import static br.com.caelum.vraptor.actions.api.Acts.load;
 import static br.com.caelum.vraptor.actions.api.Acts.pagination;
 import static br.com.caelum.vraptor.actions.api.Acts.persist;
+import static br.com.caelum.vraptor.view.Results.json;
 import static br.com.caelum.vraptor.view.Results.referer;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import org.dtelaroli.cms.domain.model.Category;
 import org.dtelaroli.cms.domain.model.Content;
 import org.dtelaroli.cms.domain.model.Tag;
 
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
@@ -87,6 +89,15 @@ public class ContentController {
 	public void remove(@NotNull Long id) {
 		onErrorRedirect();
 		act.as(delete()).by(Content.class, id).redirectTo(this).index();		
+	}
+	
+	@Post @Consumes("application/json")
+	public void publish(Long id, boolean publish) {
+		Content content = edit(id);
+		content.setPublished(publish);
+		
+		act.as(persist()).save(content);
+		act.result().use(json()).from(content).serialize();
 	}
 
 	private void onErrorRedirect() {

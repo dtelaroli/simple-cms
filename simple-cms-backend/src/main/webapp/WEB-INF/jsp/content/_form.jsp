@@ -43,12 +43,10 @@
 					${content.updatedAt.time}
 				</div>
 				<div class="form-group">
-					<c:if test="${content.published}">
-						<button class="btn btn-default" type="button">Draft</button>
-					</c:if>
-					<c:if test="${not content.published}">
-						<button class="btn btn-default" type="button">Publish</button>
-					</c:if>
+					<button id="draft" class="btn btn-default" type="button" onclick="Content.publish(false)" 
+						style="display: ${content.published ? 'none' : 'block'}">Draft</button>
+					<button id="publish" class="btn btn-default" type="button" onclick="Content.publish(true)"
+						style="display: ${content.published ? 'block' : 'none'}">Publish</button>
 				</div>
 			</div>
 		</div>
@@ -67,6 +65,24 @@
 <script>
 	tinymce.init({
 		selector : '#body',
-		height : 500
+		height : 400
 	});
+	
+	var Content = {
+		init: function() {
+			
+		},
+		publish: function(publish) {
+			Backend.Ajax.post('${linkTo[info.controller].publish()}', {id: '${content.id}', publish: publish}, function(result) {
+				if(result.content.published) {
+					$('#draft').show();
+					$('#publish').hide();
+				}
+				else {
+					$('#publish').show();
+					$('#draft').hide();
+				}
+			}, '#draft,#publish');
+		}
+	};
 </script>
