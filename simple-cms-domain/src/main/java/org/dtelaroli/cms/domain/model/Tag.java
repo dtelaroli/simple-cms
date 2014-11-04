@@ -7,8 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import br.com.caelum.vraptor.actions.api.db.IModel;
+
 @Entity
-public class Tag {
+public class Tag implements IModel {
+
+	private static final long serialVersionUID = 4468072851039659390L;
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
