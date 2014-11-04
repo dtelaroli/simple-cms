@@ -3,8 +3,8 @@
 <%@ attribute name="action" %>
 <%@ attribute name="pageObject" type="java.lang.Object" %>
 
-<c:set var="controller" value="${empty controller ? requestInfo.controller : controller}"/>
-<c:set var="action" value="${empty action ? requestInfo.action : action}"/>
+<c:set var="controller" value="${empty controller ? info.controller : controller}"/>
+<c:set var="action" value="${empty action ? info.action : action}"/>
 <c:set var="page" value="${empty pageObject ? page : pageObject}"/>
 
 <ul class="pagination pagination-sm">

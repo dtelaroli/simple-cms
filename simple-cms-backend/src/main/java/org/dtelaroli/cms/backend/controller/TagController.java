@@ -4,9 +4,12 @@ import static br.com.caelum.vraptor.actions.api.Acts.persist;
 import static br.com.caelum.vraptor.view.Results.json;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.dtelaroli.cms.domain.model.Tag;
 
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.actions.api.Act;
@@ -28,10 +31,11 @@ public class TagController {
 		this.act = act;
 	}
 
-	@Post
-	public void save(Tag tag) {
+	@Post @Consumes("application/json")
+	public void save(@NotNull @Valid Tag tag) {
+		act.validator().onErrorSendBadRequest();
 		Tag saved = act.as(persist()).save(tag).andReturn();
-		act.result().use(json()).from(saved).serialize();
+		act.result().use(json()).withoutRoot().from(saved).serialize();
 	}
 
 }

@@ -77,23 +77,15 @@
 			<h3 class="panel-title">Tags</h3>
 		</div>
 		<div class="panel-body">
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" value="">
-					Option 1
-				</label>
-			</div>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" value="">
-					Option 2
-				</label>
+			<div id="tagContainer">
 			</div>
 			<div class="input-group input-group-sm">
-				<input type="text" class="form-control" placeholder="Add new">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">Add</button>
-				</span>
+				<form>
+					<input type="text" id="tag" class="form-control" placeholder="Add new tag">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" onclick="addTag()">Add</button>
+					</span>
+				</form>
 			</div>
 			<!-- /input-group -->
 		</div>
@@ -105,4 +97,32 @@
 	tinymce.init({
 		selector : '#body'
 	});
+	
+	function addTag() {
+		var tagName = $('#tag').val();
+		var json = JSON.stringify({ tag: { name: tagName }});
+		$.ajax({
+			url: '${linkTo[TagController].save}',
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/json',
+			data: json,
+			success: function(result) {
+				var tagTmpl = $.templates("#tagTmpl");
+				var html = tagTmpl.render(result);
+				$('#tagContainer').append(html);
+			},
+			error: function(result) {
+				console.log('e', result)
+			}
+		});
+	}
+</script>
+<script id="tagTmpl" type="text/x-jsrender">
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" value="{{:id}}">
+			{{:name}}
+		</label>
+	</div>
 </script>
