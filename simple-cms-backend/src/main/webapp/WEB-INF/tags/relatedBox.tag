@@ -26,7 +26,7 @@
 		<div class="input-group input-group-sm">
 			<input type="text" id="${name}Input" class="form-control"
 				placeholder="Add new item"> <span class="input-group-btn">
-				<button class="btn btn-default" type="button" onclick="add('${name}', '${linkTo[controller].save}')">Add</button>
+				<button class="btn btn-default" type="button" onclick="Backend.Related.add('${name}', '${linkTo[controller].save}')">Add</button>
 			</span>
 		</div>
 	</div>

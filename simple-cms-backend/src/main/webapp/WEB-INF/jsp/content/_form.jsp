@@ -1,14 +1,3 @@
-<style>
-.panel-body .checkbox {
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-.panel-body .input-group {
-	margin-top: 20px;
-}
-</style>
-<cms:js />
 <div class="col-md-9">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -73,34 +62,11 @@
 		
 </div>
 
+<cms:js />
+
 <script>
 	tinymce.init({
 		selector : '#body',
 		height : 500
 	});
-
-	function add(name, url) {
-		var nameObj= $('#' + name + 'Input').val();
-		var obj = {};
-		obj[name] = {
-			name : nameObj
-		};
-		
-		$.ajax({
-			url : url,
-			type : 'post',
-			dataType : 'json',
-			contentType : 'application/json',
-			data : JSON.stringify(obj),
-			success : function(result) {
-				var tmpl = $.templates('#' + name + 'Tmpl');
-				var html = tmpl.render(result);
-				$('#' + name + 'Container').append(html);
-				$('#' + name + 'Input').val('');
-			},
-			error : function(result) {
-				console.log('e', result)
-			}
-		});
-	}
 </script>
