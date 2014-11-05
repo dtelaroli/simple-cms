@@ -1,7 +1,5 @@
 package org.dtelaroli.cms.backend.controller;
 
-import static br.com.caelum.vraptor.actions.api.Acts.persist;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -33,7 +31,7 @@ public class CategoryController {
 	@Post @Consumes("application/json")
 	public void save(@NotNull @Valid Category category) {
 		act.validator().onErrorSendBadRequest();
-		act.as(persist()).save(category).jsonWithoutRoot().serialize();
+		act.save(category).jsonWithoutRoot().serialize();
 	}
 
 }
