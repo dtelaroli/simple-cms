@@ -74,7 +74,7 @@
 		},
 		publish: function(publish) {
 			Backend.Ajax.post('${linkTo[info.controller].publish()}', {id: '${content.id}', publish: publish}, function(result) {
-				if(result.content.published) {
+				if(result.published) {
 					$('#draft').show();
 					$('#publish').hide();
 				}

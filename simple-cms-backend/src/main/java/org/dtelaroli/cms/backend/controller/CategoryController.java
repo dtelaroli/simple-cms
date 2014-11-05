@@ -1,7 +1,6 @@
 package org.dtelaroli.cms.backend.controller;
 
 import static br.com.caelum.vraptor.actions.api.Acts.persist;
-import static br.com.caelum.vraptor.view.Results.json;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -34,8 +33,7 @@ public class CategoryController {
 	@Post @Consumes("application/json")
 	public void save(@NotNull @Valid Category category) {
 		act.validator().onErrorSendBadRequest();
-		Category saved = act.as(persist()).save(category).andReturn();
-		act.result().use(json()).withoutRoot().from(saved).serialize();
+		act.as(persist()).save(category).jsonWithoutRoot().serialize();
 	}
 
 }

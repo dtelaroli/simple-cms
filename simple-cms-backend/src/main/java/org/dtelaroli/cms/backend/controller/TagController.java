@@ -1,7 +1,6 @@
 package org.dtelaroli.cms.backend.controller;
 
 import static br.com.caelum.vraptor.actions.api.Acts.persist;
-import static br.com.caelum.vraptor.view.Results.json;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -34,8 +33,7 @@ public class TagController {
 	@Post @Consumes("application/json")
 	public void save(@NotNull @Valid Tag tag) {
 		act.validator().onErrorSendBadRequest();
-		Tag saved = act.as(persist()).save(tag).andReturn();
-		act.result().use(json()).withoutRoot().from(saved).serialize();
+		act.as(persist()).save(tag).jsonWithoutRoot().serialize();
 	}
 
 }

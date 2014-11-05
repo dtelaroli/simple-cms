@@ -33,7 +33,7 @@ public class CategoryControllerTest {
 	}
 
 	@Test
-	public void shouldSaveTag() throws Exception {
+	public void shouldSaveCategory() throws Exception {
 		controller.save(category);
 		
 		verify(act).as(persist());

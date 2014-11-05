@@ -13,12 +13,16 @@ var Backend = {
 						var tmpl = $.templates('#loader');
 						var html = tmpl.render();
 						$(loader).append(html);
+						$(loader).prop('disabled', true);
 					}
 					
 					NProgress.start();
 				},
 				complete: function() {
-					$('.ajaxloader').remove();
+					if(loader) {
+						$('.ajaxloader').remove();
+						$(loader).prop('disabled', false);
+					}
 					
 					NProgress.done();
 				}

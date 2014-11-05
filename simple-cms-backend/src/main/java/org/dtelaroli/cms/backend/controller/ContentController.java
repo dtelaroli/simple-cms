@@ -5,7 +5,6 @@ import static br.com.caelum.vraptor.actions.api.Acts.list;
 import static br.com.caelum.vraptor.actions.api.Acts.load;
 import static br.com.caelum.vraptor.actions.api.Acts.pagination;
 import static br.com.caelum.vraptor.actions.api.Acts.persist;
-import static br.com.caelum.vraptor.view.Results.json;
 import static br.com.caelum.vraptor.view.Results.referer;
 
 import java.util.List;
@@ -96,8 +95,7 @@ public class ContentController {
 		Content content = loadById(id);
 		content.setPublished(publish);
 		
-		act.as(persist()).save(content);
-		act.result().use(json()).from(content).serialize();
+		act.as(persist()).save(content).jsonWithoutRoot().serialize();
 	}
 
 	private Content loadById(Long id) {
