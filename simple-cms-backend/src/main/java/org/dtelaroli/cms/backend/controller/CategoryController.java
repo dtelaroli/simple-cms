@@ -30,8 +30,7 @@ public class CategoryController {
 
 	@Post @Consumes("application/json")
 	public void save(@NotNull @Valid Category category) {
-		act.validator().onErrorSendBadRequest();
-		act.save(category).jsonWithoutRoot().serialize();
+		act.onValidationErrorSendBadRequest().save(category).jsonWithoutRoot().serialize();
 	}
 
 }
