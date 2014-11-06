@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -28,11 +29,12 @@ public class Content extends Model {
 	@NotNull
 	private boolean published;
 	
+	@ManyToOne
+	private Category category;
+	
 	@ManyToMany
 	private List<Tag> tags = new ArrayList<>();
 
-	@ManyToMany
-	private List<Category> categories = new ArrayList<>();
 	
 	public Content() {
 	}
@@ -61,12 +63,12 @@ public class Content extends Model {
 		this.tags = tags;
 	}
 
-	public List<Category> getCategories() {
-		return categories;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public String getSummary() {

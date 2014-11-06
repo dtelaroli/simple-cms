@@ -1,12 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="cms"%>
 
-<%@ attribute name="listSaved" required="true" type="java.lang.Object"%>
+<%@ attribute name="saved" required="true" type="java.lang.Object"%>
 <%@ attribute name="listAll" required="true" type="java.lang.Object"%>
 <%@ attribute name="inputName" required="true"%>
 <%@ attribute name="controller" required="true" type="java.lang.Object"%>
 <%@ attribute name="name" required="true"%>
 <%@ attribute name="title" required="true"%>
+<%@ attribute name="multiple" required="false" type="java.lang.Boolean"%>
+
+<c:set var="type" value="${multiple ? 'checkbox' : 'radio'}"/>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -14,10 +17,10 @@
 	</div>
 	<div class="panel-body">
 		<c:forEach var="item" items="${listAll}">
-			<div class="checkbox">
+			<div class="${type}">
 				<label> 
-					<input type="checkbox" name="${inputName}"
-					value="${item.id}" ${listSaved.contains(item) ? 'checked': ''}>
+					<c:set var="checked" value="${(not multiple and saved eq item) or (multiple and saved.contains(item)) ? 'checked': ''}"/>
+					<input type="${type}" name="${inputName}" value="${item.id}" ${checked}/>
 					${item.name}
 				</label>
 			</div>
@@ -34,9 +37,9 @@
 </div>
 
 <script id="${name}Tmpl" type="text/x-jsrender">
-	<div class="checkbox">
+	<div class="${type}">
 		<label>
-			<input type="checkbox" name="${inputName}" value="{{:id}}" checked>
+			<input type="${type}" name="${inputName}" value="{{:id}}" checked/>
 			{{:name}}
 		</label>
 	</div>

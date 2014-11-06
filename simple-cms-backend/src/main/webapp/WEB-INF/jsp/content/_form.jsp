@@ -52,11 +52,11 @@
 		</div>
 	</c:if>
 
-	<cms:relatedBox listSaved="${content.categories}" controller="${CategoryController}" 
-		inputName="content.categories[].id" name="category" listAll="${categoryList}" title="Categories"/>
+	<cms:relatedBox saved="${content.category}" controller="${CategoryController}" 
+		inputName="content.category.id" name="category" listAll="${categoryList}" title="Category" />
 		
-	<cms:relatedBox listSaved="${content.tags}" controller="${TagController}" 
-		inputName="content.tags[].id" name="tag" listAll="${tagList}" title="Tags"/>
+	<cms:relatedBox saved="${content.tags}" controller="${TagController}" 
+		inputName="content.tags[].id" name="tag" listAll="${tagList}" title="Tags" multiple="true"/>
 		
 </div>
 
@@ -65,7 +65,10 @@
 <script>
 	tinymce.init({
 		selector : '#body',
-		height : 400
+		height : 400,
+		plugins: 'emoticons autosave table autolink anchor code hr image link lists media preview spellchecker wordcount visualchars pagebreak',
+	    toolbar: 'table code image link anchor emoticons spellchecker preview',
+
 	});
 	
 	var Content = {
