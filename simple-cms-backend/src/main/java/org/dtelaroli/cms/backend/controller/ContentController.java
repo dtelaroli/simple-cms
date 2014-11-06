@@ -1,9 +1,8 @@
 package org.dtelaroli.cms.backend.controller;
 
+import static br.com.caelum.vraptor.actions.api.Acts.list;
 import static br.com.caelum.vraptor.actions.api.Acts.pagination;
 import static br.com.caelum.vraptor.view.Results.referer;
-
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -21,6 +20,8 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.actions.api.Act;
+import br.com.caelum.vraptor.actions.api.action.ListAction;
+import br.com.caelum.vraptor.actions.api.db.order.Order;
 import br.com.caelum.vraptor.actions.api.db.pagination.Page;
 
 @Controller @Path("/content")
@@ -46,9 +47,8 @@ public class ContentController {
 	}
 
 	@Get("/index/{page}")
-	public Page<Content> index(@NotNull Integer page) {
-		onErrorRedirect();
-		return act.as(pagination()).page(page).paginate(Content.class);
+	public Page<Content> index(int page) {
+		return act.as(pagination()).with(Order.desc("updatedAt")).page(page).paginate(Content.class);
 	}
 	
 	@Get
@@ -57,16 +57,12 @@ public class ContentController {
 	}
 
 	private void includes() {
-		List<Tag> tags = act.listAll(Tag.class);
-		act.result().include("tagList", tags);
-		
-		List<Category> categories = act.listAll(Category.class);
-		act.result().include("categoryList", categories);
+		ListAction list = act.as(list()).with(Order.asc("name"));
+		act.include("tagList", list.all(Tag.class)).include("categoryList", list.all(Category.class));
 	}
 
 	@Get("/{id}")
-	public Content edit(@NotNull @Valid Long id) {
-		onErrorRedirect();
+	public Content edit(Long id) {
 		includes();
 		return loadById(id);
 	}
