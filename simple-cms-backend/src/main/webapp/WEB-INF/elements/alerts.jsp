@@ -18,3 +18,29 @@
 		</c:forEach>
 	</div>
 </c:if>
+
+<div id="messageContainer"></div>
+<script id="successTmpl" type="text/x-jsrender">
+	<div id="bootstrapSuccess" class="alert alert-success alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert">
+			<span aria-hidden="true">&times;</span>
+			<span class="sr-only">Close</span>
+		</button>
+		{{if message}}
+			{{:message}}
+		{{else}}
+			Operation was successful
+		{{/if}}
+	</div>
+</script>
+<script id="errorTmpl" type="text/x-jsrender">
+	<div id="bootstrapError" class="alert alert-danger alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert">
+			<span aria-hidden="true">&times;</span>
+			<span class="sr-only">Close</span>
+		</button>
+		{{for errors}}
+			{{:category}} - {{:message}}<br />
+		{{/for}}
+	</div>	
+</script>
