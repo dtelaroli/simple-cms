@@ -2,7 +2,6 @@ package org.dtelaroli.cms.backend.controller;
 
 import static br.com.caelum.vraptor.actions.api.Acts.list;
 import static br.com.caelum.vraptor.actions.api.Acts.pagination;
-import static br.com.caelum.vraptor.view.Results.referer;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -69,14 +68,12 @@ public class ContentController {
 
 	@Post("/") @Put("/{content.id}")
 	public void save(@NotNull @Valid Content content) {
-		onErrorRedirect();
-		act.save(content).redirectTo(this).edit(content.getId());
+		act.onErrorRedirectToReferer().save(content).redirectTo(this).edit(content.getId());
 	}
 
 	@Delete("/{id}")
 	public void remove(@NotNull Long id) {
-		onErrorRedirect();
-		act.deleteBy(Content.class, id).redirectTo(this).index();		
+		act.onErrorRedirectToReferer().deleteBy(Content.class, id).redirectTo(this).index();		
 	}
 	
 	@Post @Consumes("application/json")
@@ -84,14 +81,10 @@ public class ContentController {
 		Content content = loadById(id);
 		content.setPublished(publish);
 		
-		act.save(content).jsonWithoutRoot().serialize();
+		act.onErrorSendBadRequest().save(content).jsonWithoutRoot().serialize();
 	}
 
 	private Content loadById(Long id) {
 		return act.loadBy(Content.class, id);
-	}
-
-	private void onErrorRedirect() {
-		act.validator().onErrorUse(referer()).redirect();
 	}
 }

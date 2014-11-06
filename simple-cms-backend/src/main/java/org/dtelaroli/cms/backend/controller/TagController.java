@@ -30,7 +30,7 @@ public class TagController {
 
 	@Post @Consumes("application/json")
 	public void save(@NotNull @Valid Tag tag) {
-		act.onValidationErrorSendBadRequest().save(tag).jsonWithoutRoot().serialize();
+		act.onErrorSendBadRequest().save(tag).jsonWithoutRoot().serialize();
 	}
 
 }
