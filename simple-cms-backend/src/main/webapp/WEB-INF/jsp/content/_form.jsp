@@ -66,9 +66,13 @@
 	tinymce.init({
 		selector : '#body',
 		height : 400,
-		plugins: 'emoticons autosave table autolink anchor code hr image link lists media preview spellchecker wordcount visualchars pagebreak',
-	    toolbar: 'table code image link anchor emoticons spellchecker preview',
-
+		plugins: 'emoticons table autolink anchor code hr image media link preview spellchecker pagebreak lists searchreplace',
+		menubar: false,
+    	toolbar1: 
+    		'undo redo | alignleft aligncenter alignright | indent outdent | ' +
+    		'bold italic underline strikethrough | subscript superscript | table code | image media emoticons | link anchor',
+    	toolbar2: 'formatselect fontselect fontsizeselect removeformat | bullist numlist pagebreak | search searchreplace | spellchecker preview'
+    	
 	});
 	
 	var Content = {
