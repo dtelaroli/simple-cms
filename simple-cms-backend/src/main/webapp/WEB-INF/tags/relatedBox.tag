@@ -30,7 +30,7 @@
 			<input type="text" id="${name}Input" class="form-control"
 				placeholder="Add new item"/> 
 			<span class="input-group-btn">
-				<button id="${name}button" class="btn btn-default" type="button" onclick="Backend.Related.add('${name}', '${linkTo[controller].save}')">Add</button>
+				<button id="${name}button" class="btn btn-primary" type="button" onclick="Backend.Related.add('${name}', '${linkTo[controller].save}')">${t['action.add']}</button>
 			</span>
 		</div>
 	</div>

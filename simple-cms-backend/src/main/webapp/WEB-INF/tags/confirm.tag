@@ -9,14 +9,14 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span>
-					<span class="sr-only">Close</span>
+					<span class="sr-only">${t['action.close']}</span>
 				</button>
 				<h4 class="modal-title" id="label${id}">${title}</h4>
 			</div>
 			<div class="modal-body">${msg}</div>
 			<div class="modal-footer">
 				<jsp:doBody/>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">${t['action.cancel']}</button>
 			</div>
 		</div>
 	</div>

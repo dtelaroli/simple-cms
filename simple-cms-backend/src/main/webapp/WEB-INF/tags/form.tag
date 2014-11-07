@@ -1,10 +1,12 @@
+<%@ taglib tagdir="/WEB-INF/tags" prefix="cms"%>
 <%@ attribute name="action" required="true" %>
 <%@ attribute name="method" required="true"%>
+<%@ attribute name="title" required="true"%>
 
-<div class="row">
+<cms:view title="${title}">
 	<form role="form" action="${action}" method="${method ne 'get' ? 'post' : method}">
 		<input type="hidden" name="_method" value="${method}"/>
-		<jsp:doBody/>
-		<jsp:include page="./_form.jsp"></jsp:include>
+		<jsp:doBody />
+		<jsp:include page="./_form.jsp"/>
 	</form>
-</div>
+</cms:view>

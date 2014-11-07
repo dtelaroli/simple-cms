@@ -4,21 +4,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title><sitemesh:write property='title'/></title>
+	<title><sitemesh:write property='title'/> - Simple CMS Administrator</title>
 	<sitemesh:write property='head'/>
 	<jsp:include page="/WEB-INF/elements/css.jsp"></jsp:include>
 </head>
 <body>
-	<header class="container">
-		<jsp:include page="/WEB-INF/elements/header.jsp"></jsp:include>
-	</header>
-
-	<nav class="container">
-		<jsp:include page="/WEB-INF/elements/menu.jsp"></jsp:include>
-	</nav>
+	<jsp:include page="/WEB-INF/elements/nav.jsp"></jsp:include>
 
 	<section class="container">
-		<jsp:include page="/WEB-INF/elements/alerts.jsp"></jsp:include>
 		<sitemesh:write property='body'/>
 	</section>
 

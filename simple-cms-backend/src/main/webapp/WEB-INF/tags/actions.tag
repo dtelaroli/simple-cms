@@ -15,7 +15,7 @@
 			<span class="glyphicon glyphicon-remove"></span>
 		</button>
 	</div>
-	<cms:confirm title="Delete ${t[object['class']['simpleName']]} #${object.id}" msg="Are you sure?" id="confirm${object.id}">
-		<button type="button" class="btn btn-primary" onclick="$('#formDelete${object.id}').submit()">Delete</button>
+	<cms:confirm title="${t['action.delete']} ${t[object['class']['simpleName']]} #${object.id}" msg="${t['action.confirm.message']}" id="confirm${object.id}">
+		<button type="button" class="btn btn-danger" onclick="$('#formDelete${object.id}').submit()">${t['action.delete']}</button>
 	</cms:confirm>
 </form>
