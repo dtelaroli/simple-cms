@@ -1,1 +1,1 @@
-<cms:form action="${linkTo[info.controller].save()}" method="post" title="Content"/>
+<cms:form action="${linkTo[info.controller].save()}" method="post" title="${t['content']}"/>

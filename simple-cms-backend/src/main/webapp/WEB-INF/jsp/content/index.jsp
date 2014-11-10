@@ -1,4 +1,4 @@
-<cms:view title="Contents">
+<cms:view title="${t['contents']}">
 	<div class="col-md-2">
 		<div class="list-group">
 			<a class="list-group-item" href="${linkTo[info.controller].add()}">${t['action.add']}&nbsp;${t['add']}&nbsp;${t['content']}</a>

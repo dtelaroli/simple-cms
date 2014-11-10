@@ -1,5 +1,6 @@
 package org.dtelaroli.cms.backend.controller;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.notNullValue;
@@ -14,17 +15,16 @@ import org.dtelaroli.cms.domain.model.User;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.actions.api.db.pagination.Page;
 import br.com.caelum.vraptor.actions.api.test.MockAct;
-import br.com.caelum.vraptor.util.test.MockResult;
+import br.com.caelum.vraptor.util.test.MockSerializationResult;
 
 public class UserControllerTest {
 
 	private UserController controller;
 	private MockAct act;
 	private User user;
-	private Result result;
+	private MockSerializationResult result;
 	private Class<?> c = UserController.class;
 	private Role role;
 	
@@ -39,8 +39,8 @@ public class UserControllerTest {
 		role.setName("Bar");
 		role.setAccessLevel(1);
 		
-		result = spy(new MockResult());
-		act = new MockAct(result).returning(user, role);
+		result = spy(new MockSerializationResult());
+		act = spy(new MockAct(result).returning(user, role));
 		controller = new UserController(act);
 	}
 
@@ -102,5 +102,21 @@ public class UserControllerTest {
 		
 		List<Role> roles = (List<Role>) result.included().get("roleList");
 		assertThat(roles.get(0).getId(), equalTo(1L));
+	}
+	
+	@Test
+	public void shouldLoadAndActiveUser() throws Exception {
+		controller.active(1L, true);
+		
+		assertThat(result.serializedResult(), containsString("\"active\":true"));
+		verify(act).loadBy(User.class, 1L);
+		verify(act).save(user);
+	}
+	
+	@Test
+	public void shouldLoadAndInactiveUser() throws Exception {
+		controller.active(1L, false);
+		
+		assertThat(result.serializedResult(), containsString("\"active\":false"));
 	}
 }

@@ -1,5 +1,6 @@
 package org.dtelaroli.cms.backend.controller;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.notNullValue;
@@ -15,17 +16,16 @@ import org.dtelaroli.cms.domain.model.Tag;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.actions.api.db.pagination.Page;
 import br.com.caelum.vraptor.actions.api.test.MockAct;
-import br.com.caelum.vraptor.util.test.MockResult;
+import br.com.caelum.vraptor.util.test.MockSerializationResult;
 
 public class ContentControllerTest {
 
 	private ContentController controller;
 	private MockAct act;
 	private Content content;
-	private Result result;
+	private MockSerializationResult result;
 	private Class<?> c = ContentController.class;
 	private Tag tag;
 	private Category category;
@@ -45,8 +45,8 @@ public class ContentControllerTest {
 		category.setId(1L);
 		category.setName("Category");
 		
-		result = spy(new MockResult());
-		act = new MockAct(result).returning(content, tag, category);
+		result = spy(new MockSerializationResult());
+		act = spy(new MockAct(result).returning(content, tag, category));
 		
 		controller = new ContentController(act);
 	}
@@ -120,5 +120,23 @@ public class ContentControllerTest {
 		
 		List<Category> list = (List<Category>)result.included().get("categoryList");
 		assertThat(list.get(0), notNullValue());
+	}
+	
+	@Test
+	public void shouldLoadAndPublishCategory() throws Exception {
+		controller.publish(1L, true);
+		
+		assertThat(result.serializedResult(), containsString("\"published\":true"));
+		verify(act).loadBy(Content.class, 1L);
+		verify(act).save(content);
+	}
+	
+	@Test
+	public void shouldLoadAndDraftCategory() throws Exception {
+		controller.publish(1L, false);
+		
+		assertThat(result.serializedResult(), containsString("\"published\":false"));
+		verify(act).loadBy(Content.class, 1L);
+		verify(act).save(content);
 	}
 }

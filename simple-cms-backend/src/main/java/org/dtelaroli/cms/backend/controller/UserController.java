@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import org.dtelaroli.cms.domain.model.Role;
 import org.dtelaroli.cms.domain.model.User;
 
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
@@ -49,7 +50,7 @@ public class UserController {
 	
 	@Get("/index/{page}")
 	public Page<User> index(@NotNull Integer page) {
-		return act.as(pagination()).with(Order.asc("name")).page(page).paginate(User.class);
+		return act.as(pagination()).with(Order.asc("username")).page(page).paginate(User.class);
 	}
 	
 	@Get
@@ -60,7 +61,11 @@ public class UserController {
 	@Get("/{id}")
 	public User edit(@NotNull Long id) {
 		includes();
-		return act.onErrorRedirectToReferer().loadBy(User.class, id);
+		return loadBy(id);
+	}
+
+	private User loadBy(Long id) {
+		return act.loadBy(User.class, id);
 	}
 	
 	private void includes() {
@@ -81,6 +86,13 @@ public class UserController {
 	@Delete("/{id}")
 	public void remove(@NotNull Long id) {
 		act.onErrorRedirectToReferer().deleteBy(User.class, id).redirectTo(this).index();
+	}
+
+	@Post @Consumes("application/json")
+	public void active(Long id, boolean active) {
+		User user = loadBy(id);
+		user.setActive(active);
+		act.save(user).jsonWithoutRoot().serialize();
 	}
 	
 }

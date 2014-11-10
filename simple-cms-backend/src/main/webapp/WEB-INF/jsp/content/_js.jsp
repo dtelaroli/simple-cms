@@ -10,9 +10,6 @@
 	});
 
 	var Content = {
-		init : function() {
-
-		},
 		publish : function(publish) {
 			Backend.Ajax.post('${linkTo[info.controller].publish()}', {
 				id : '${content.id}',
