@@ -41,7 +41,7 @@ public class ModelTest {
 	}
 
 	@Test
-	public void shouldSetUpdatedDeteOnUpdate() {
+	public void shouldSetUpdatedAtOnUpdate() {
 		Ebean.save(model);
 		assertThat(model.getId(), greaterThan(0L));
 		assertThat(model.getCreatedAt(), notNullValue());

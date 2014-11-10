@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
+import org.dtelaroli.cms.domain.model.Role;
 import org.dtelaroli.cms.domain.model.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,12 +26,21 @@ public class UserControllerTest {
 	private User user;
 	private Result result;
 	private Class<?> c = UserController.class;
+	private Role role;
 	
 	@Before
 	public void setUp() throws Exception {
-		user = new User(1L, "Foo");
+		user = new User();
+		user.setId(1l);
+		user.setUsername("Foo");
+		
+		role = new Role();
+		role.setId(1L);
+		role.setName("Bar");
+		role.setAccessLevel(1);
+		
 		result = spy(new MockResult());
-		act = new MockAct(result).returning(user);
+		act = new MockAct(result).returning(user, role);
 		controller = new UserController(act);
 	}
 
@@ -44,7 +54,7 @@ public class UserControllerTest {
 		assertThat(paginate, instanceOf(Page.class));
 		assertThat(paginate.getPageSize(), equalTo(1));
 		assertThat(user.getId(), equalTo(1L));
-		assertThat(user.getName(), equalTo("Foo"));
+		assertThat(user.getUsername(), equalTo("Foo"));
 	}
 
 	@Test
@@ -74,5 +84,23 @@ public class UserControllerTest {
 		controller.remove(1L);
 		
 		verify(result).redirectTo(c);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shouldIncludeRolesOnAdd() {
+		controller.add();
+		
+		List<Role> roles = (List<Role>) result.included().get("roleList");
+		assertThat(roles.get(0).getId(), equalTo(1L));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shouldIncludeRolesOnEdit() {
+		controller.edit(1L);
+		
+		List<Role> roles = (List<Role>) result.included().get("roleList");
+		assertThat(roles.get(0).getId(), equalTo(1L));
 	}
 }
