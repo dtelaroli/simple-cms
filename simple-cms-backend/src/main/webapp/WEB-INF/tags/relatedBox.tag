@@ -28,7 +28,7 @@
 		<div id="${name}Container"></div>
 		<div class="input-group input-group-sm">
 			<input type="text" id="${name}Input" class="form-control"
-				placeholder="Add new item"/> 
+				placeholder="Add new item" maxlength="80"/> 
 			<span class="input-group-btn">
 				<button id="${name}button" class="btn btn-primary" type="button" onclick="Backend.Related.add('${name}', '${linkTo[controller].save}')">${t['action.add']}</button>
 			</span>

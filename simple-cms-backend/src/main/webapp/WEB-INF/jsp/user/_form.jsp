@@ -5,21 +5,23 @@
 		</div>
 		<div class="panel-body">
 			<div class="form-group">
-				<label for="username">${t['user.username']}</label>
-				<input type="text" class="form-control" id="name" name="user.username" value="${user.username}"
-					placeholder="Enter ${t['user.username']}">
+				<label for="email">${t['user.email']}</label> <input
+					type="email" class="form-control" id="email" name="user.email" maxlength="120"
+					value="${user.email}" placeholder="Enter ${t['user.email']}">
 			</div>
 			<div class="form-group">
-				<label for="password">${t['user.password']}</label>
-				<input type="password" class="form-control" id="password" name="user.password" value="${user.password}"
+				<label for="password">${t['user.password']}</label> <input
+					type="password" class="form-control" id="password" minlength="6"
+					name="user.password" value="${user.password}"
 					placeholder="Enter ${t['user.password']}">
 			</div>
 			<div class="form-group">
-				<label for="confirm">${t['user.confirm']}</label>
-				<input type="password" class="form-control" id="confirm" name="user.confirm" value="${user.confirm}"
+				<label for="confirm">${t['user.confirm']}</label> <input
+					type="password" class="form-control" id="confirm"
+					name="user.confirm" value="${user.confirm}"
 					placeholder="Enter ${t['user.confirm']}">
 			</div>
-			
+
 			<button class="btn btn-primary">${t['action.save']}&nbsp;${t['user']}</button>
 			<a class="btn btn-default" href="${linkTo[info.controller].index()}">${t['action.back']}</a>
 		</div>
@@ -53,4 +55,39 @@
 		</div>
 	</c:if>
 
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">${t['roles']} (Level: Name)</h3>
+		</div>
+		<div class="panel-body">
+			<c:forEach var="item" items="${roleList}">
+				<div class="checkbox">
+					<label> 
+						<c:set var="checked"
+							value="${user.roles.contains(item) ? 'checked': ''}" />
+						<input type="checkbox" name="user.roles[].id" value="${item.id}" ${checked} /> ${item.accessLevel}: ${item.name}
+					</label>
+				</div>
+			</c:forEach>
+			<div id="roleContainer"></div>
+			<div class="input-group input-group-sm">
+				<input type="text" id="roleInput" class="form-control"
+					placeholder="Add new item" maxlength="80" /> 
+				<span class="input-group-btn">
+					<button id="rolebutton" class="btn btn-primary" type="button"
+					onclick="Backend.Related.add('role', '${linkTo[RoleController].save}')">${t['action.add']}</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+
 </div>
+<script id="roleTmpl" type="text/x-jsrender">
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" name="user.roles[].id" value="{{:id}}" checked/>
+			{{:name}}
+		</label>
+	</div>
+</script>

@@ -8,7 +8,7 @@
 				<label for="title">${t['title']}</label>
 				<input type="text" class="form-control" id="title"
 					name="content.title" value="${content.title}"
-					placeholder="Enter ${t['title']}">
+					placeholder="Enter ${t['title']}" maxlength="1024">
 				<input type="hidden" name="content.id" value="${content.id}" />
 			</div>
 

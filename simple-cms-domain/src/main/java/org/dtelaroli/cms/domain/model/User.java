@@ -3,21 +3,31 @@ package org.dtelaroli.cms.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
+@UniqueConstraint(columnNames = "email")
 public class User extends Model {
 
 	private static final long serialVersionUID = 44587093069375546L;
 
 	@NotNull
-	private String username;
+	@Email
+	@Column(length = 120)
+	private String email;
 	
 	@NotNull
+	@Column(length = 80)
+	@Size(min = 6)
 	private String password;
 	
 	@Transient
@@ -40,12 +50,12 @@ public class User extends Model {
 		return password.equals(confirm);
 	}
 	
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {

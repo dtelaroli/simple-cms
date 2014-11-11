@@ -13,7 +13,7 @@ public class UserTest {
 	@Before
 	public void setUp() throws Exception {
 		user = new User();
-		user.setUsername("user");
+		user.setEmail("user");
 		user.setPassword("password");
 	}
 

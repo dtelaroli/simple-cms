@@ -19,7 +19,7 @@ public class Tag implements IModel {
 	private Long id;
 	
 	@NotBlank
-	@Column(length = 40)
+	@Column(length = 80)
 	private String name;
 	
 	public Tag() {

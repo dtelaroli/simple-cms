@@ -13,14 +13,14 @@
 		<table class="table table-condensed table-hover table-striped table-responsive">
 			<thead>
 				<tr>
-					<th>${t['user.username']}</th>
+					<th>${t['user.email']}</th>
 					<th>${t['action']}</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="user" items="${page.list}">
 					<tr>
-						<td>${user.username}</td>
+						<td>${user.email}</td>
 						<td>
 							<cms:actions object="${user}" editAction="${linkTo[info.controller].edit(user.id)}"
 								removeAction="${linkTo[info.controller].remove(user.id)}" />

@@ -50,7 +50,7 @@ public class UserController {
 	
 	@Get("/index/{page}")
 	public Page<User> index(@NotNull Integer page) {
-		return act.as(pagination()).with(Order.asc("username")).page(page).paginate(User.class);
+		return act.as(pagination()).with(Order.asc("email")).page(page).paginate(User.class);
 	}
 	
 	@Get

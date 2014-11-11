@@ -1,5 +1,6 @@
 package org.dtelaroli.cms.domain.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,10 +18,11 @@ public class Role implements IModel {
 	private Long id;
 	
 	@NotNull
+	@Column(length = 80)
 	private String name;
 	
 	@NotNull
-	private Integer accessLevel;
+	private Integer accessLevel = 0;
 	
 	public Role() {
 	}

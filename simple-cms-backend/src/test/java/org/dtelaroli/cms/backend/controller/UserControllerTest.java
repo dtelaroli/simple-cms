@@ -32,7 +32,7 @@ public class UserControllerTest {
 	public void setUp() throws Exception {
 		user = new User();
 		user.setId(1l);
-		user.setUsername("Foo");
+		user.setEmail("Foo");
 		
 		role = new Role();
 		role.setId(1L);
@@ -54,7 +54,7 @@ public class UserControllerTest {
 		assertThat(paginate, instanceOf(Page.class));
 		assertThat(paginate.getPageSize(), equalTo(1));
 		assertThat(user.getId(), equalTo(1L));
-		assertThat(user.getUsername(), equalTo("Foo"));
+		assertThat(user.getEmail(), equalTo("Foo"));
 	}
 
 	@Test
