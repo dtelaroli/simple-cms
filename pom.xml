@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.dtelaroli</groupId>
@@ -83,23 +84,25 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<dependencyManagement>
-		<dependency>
-			<groupId>br.com.caelum</groupId>
-			<artifactId>vraptor</artifactId>
-			<version>4.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>br.com.caelum.vraptor</groupId>
-			<artifactId>vraptor-i18n</artifactId>
-			<version>4.0.1</version>
-		</dependency>
+		<dependencies>
+			<dependency>
+				<groupId>br.com.caelum</groupId>
+				<artifactId>vraptor</artifactId>
+				<version>4.1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>br.com.caelum.vraptor</groupId>
+				<artifactId>vraptor-i18n</artifactId>
+				<version>4.0.1</version>
+			</dependency>
+		</dependencies>
 	</dependencyManagement>
 
 	<modules>
 		<module>simple-cms-backend</module>
 		<module>simple-cms-domain</module>
-    <module>simple-cms-base</module>
-  </modules>
+		<module>simple-cms-base</module>
+	</modules>
 </project>
