@@ -3,13 +3,12 @@
 		<div class="list-group">
 			<a class="list-group-item" href="${linkTo[info.controller].add()}">${t['action.add']}&nbsp;${t['add']}&nbsp;${t['user']}</a>
 			<a class="list-group-item" href='<c:url value="/"/>'>${t['action.back']}</a>
-			<%-- <a class="list-group-item" href="${linkTo[RoleController].save}">${t['role']}</a> --%>
+			<a class="list-group-item" href="${linkTo[RoleController].save}">${t['add']}&nbsp;${t['role']}</a>
 		</div>
 	</div>
 
 	<div class="col-md-10">
 		<h2>${t['user']}</h2>
-
 		<table class="table table-condensed table-hover table-striped table-responsive">
 			<thead>
 				<tr>

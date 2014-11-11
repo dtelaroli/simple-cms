@@ -11,3 +11,5 @@ before_install:
 - git clone https://github.com/dtelaroli/actions.git
 - cd actions
 - mvn install
+
+- cd ..

@@ -10,16 +10,18 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Content extends Model {
 
 	private static final long serialVersionUID = 1885202008039612248L;
 
 	@Column(length = 255)
-	@NotNull
+	@NotBlank
 	private String title;
 	
-	@NotNull
+	@NotBlank
 	@Column(length = 1024)
 	private String summary;
 	

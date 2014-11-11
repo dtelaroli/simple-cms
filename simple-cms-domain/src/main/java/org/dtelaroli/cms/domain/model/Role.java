@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import br.com.caelum.vraptor.actions.api.db.IModel;
 
 @Entity
@@ -17,7 +19,7 @@ public class Role implements IModel {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@NotBlank
 	@Column(length = 80)
 	private String name;
 	
