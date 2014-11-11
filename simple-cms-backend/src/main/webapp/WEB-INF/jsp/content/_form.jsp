@@ -56,6 +56,12 @@
 			</div>
 		</div>
 	</c:if>
+	
+	<cms:relatedBox saved="${content.roles}" controller="${RoleController}"
+		inputName="content.roles[].id" name="role" listAll="${roleList}"
+		title="${t['permission']}" multiple="true">
+		sdf	
+	</cms:relatedBox>
 
 	<cms:relatedBox saved="${content.category}"
 		controller="${CategoryController}" inputName="content.category.id"

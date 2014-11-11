@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.dtelaroli.cms.domain.model.Category;
 import org.dtelaroli.cms.domain.model.Content;
+import org.dtelaroli.cms.domain.model.Role;
 import org.dtelaroli.cms.domain.model.Tag;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,26 +30,45 @@ public class ContentControllerTest {
 	private Class<?> c = ContentController.class;
 	private Tag tag;
 	private Category category;
+	private Role role;
 	
 	@Before
 	public void setUp() throws Exception {
+		content();
+		tag();
+		category();
+		role();
+		
+		result = spy(new MockSerializationResult());
+		act = spy(new MockAct(result).returning(content, tag, category, role));
+		
+		controller = new ContentController(act);
+	}
+
+	private void role() {
+		role = new Role();
+		role.setId(1L);
+		role.setName("Role");
+		role.setAccessLevel(1);
+	}
+
+	private void category() {
+		category = new Category();
+		category.setId(1L);
+		category.setName("Category");
+	}
+
+	private void tag() {
+		tag = new Tag();
+		tag.setId(1L);
+		tag.setName("Tag");
+	}
+
+	private void content() {
 		content = new Content();
 		content.setId(1L);
 		content.setTitle("Title");
 		content.setBody("Body");
-		
-		tag = new Tag();
-		tag.setId(1L);
-		tag.setName("Tag");
-		
-		category = new Category();
-		category.setId(1L);
-		category.setName("Category");
-		
-		result = spy(new MockSerializationResult());
-		act = spy(new MockAct(result).returning(content, tag, category));
-		
-		controller = new ContentController(act);
 	}
 
 	@Test
@@ -88,19 +108,28 @@ public class ContentControllerTest {
 	
 	@SuppressWarnings("unchecked")
 	@Test
-	public void shouldIncludeTagsOnAdd() {
+	public void shouldIncludeCategoriesOnAdd() {
 		controller.add();
 		
-		List<Tag> list = (List<Tag>)result.included().get("tagList");
+		List<Category> list = (List<Category>)result.included().get("categoryList");
 		assertThat(list.get(0), notNullValue());
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Test
-	public void shouldIncludeCategoriesOnAdd() {
-		controller.add();
+	public void shouldIncludeCategoriesOnEdit() {
+		controller.edit(1L);
 		
 		List<Category> list = (List<Category>)result.included().get("categoryList");
+		assertThat(list.get(0), notNullValue());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shouldIncludeTagsOnAdd() {
+		controller.add();
+		
+		List<Tag> list = (List<Tag>)result.included().get("tagList");
 		assertThat(list.get(0), notNullValue());
 	}
 	
@@ -115,13 +144,22 @@ public class ContentControllerTest {
 	
 	@SuppressWarnings("unchecked")
 	@Test
-	public void shouldIncludeCategoriesOnEdit() {
-		controller.edit(1L);
+	public void shouldIncludeRolesOnAdd() {
+		controller.add();
 		
-		List<Category> list = (List<Category>)result.included().get("categoryList");
+		List<Role> list = (List<Role>)result.included().get("roleList");
 		assertThat(list.get(0), notNullValue());
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void shouldIncludeRolesOnEdit() {
+		controller.edit(1L);
+		
+		List<Role> list = (List<Role>)result.included().get("roleList");
+		assertThat(list.get(0), notNullValue());
+	}
+
 	@Test
 	public void shouldLoadAndPublishCategory() throws Exception {
 		controller.publish(1L, true);

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -34,9 +35,14 @@ public class Content extends Model {
 	@ManyToOne
 	private Category category;
 	
+	@Min(value = 0)
+	private Integer accessLevel;
+	
 	@ManyToMany
 	private List<Tag> tags = new ArrayList<>();
-
+	
+	@ManyToMany
+	private List<Role> roles = new ArrayList<>();
 	
 	public Content() {
 	}
@@ -87,6 +93,22 @@ public class Content extends Model {
 
 	public void setPublished(boolean published) {
 		this.published = published;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Integer getAccessLevel() {
+		return accessLevel;
+	}
+
+	public void setAccessLevel(Integer accessLevel) {
+		this.accessLevel = accessLevel;
 	}
 
 }

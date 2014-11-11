@@ -33,6 +33,8 @@
 				<button id="${name}button" class="btn btn-primary" type="button" onclick="Backend.Related.add('${name}', '${linkTo[controller].save}')">${t['action.add']}</button>
 			</span>
 		</div>
+		
+		<jsp:doBody/>
 	</div>
 </div>
 

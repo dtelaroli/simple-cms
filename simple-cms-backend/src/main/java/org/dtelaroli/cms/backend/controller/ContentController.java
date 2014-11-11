@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 
 import org.dtelaroli.cms.domain.model.Category;
 import org.dtelaroli.cms.domain.model.Content;
+import org.dtelaroli.cms.domain.model.Role;
 import org.dtelaroli.cms.domain.model.Tag;
 
 import br.com.caelum.vraptor.Consumes;
@@ -57,7 +58,9 @@ public class ContentController {
 
 	private void includes() {
 		ListAction list = act.as(list()).with(Order.asc("name"));
-		act.include("tagList", list.all(Tag.class)).include("categoryList", list.all(Category.class));
+		act.include("tagList", list.all(Tag.class))
+			.include("categoryList", list.all(Category.class))
+			.include("roleList", list.all(Role.class));
 	}
 
 	@Get("/{id}")
