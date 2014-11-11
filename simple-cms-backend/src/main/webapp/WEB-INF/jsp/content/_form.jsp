@@ -6,8 +6,7 @@
 		<div class="panel-body">
 			<div class="form-group">
 				<label for="title">${t['title']}</label>
-				<input type="text" class="form-control" id="title"
-					name="content.title" value="${content.title}"
+				<input type="text" class="form-control" id="title" name="content.title" value="${content.title}"
 					placeholder="Enter ${t['title']}" maxlength="1024">
 				<input type="hidden" name="content.id" value="${content.id}" />
 			</div>
@@ -34,7 +33,7 @@
 	<c:if test="${not empty content.id}">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">${t['content.properties']}</h3>
+				<h3 class="panel-title">${t['properties']}</h3>
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
@@ -46,29 +45,40 @@
 					${content.updatedAt.time}
 				</div>
 				<div class="form-group">
-					<button id="draft" class="btn btn-default" type="button"
-						onclick="Content.publish(false)"
+					<button id="draft" class="btn btn-default" type="button" onclick="Content.publish(false)"
 						style="display: ${content.published ? 'block' : 'none'}">${t['draft']}</button>
-					<button id="publish" class="btn btn-default" type="button"
-						onclick="Content.publish(true)"
+					<button id="publish" class="btn btn-default" type="button" onclick="Content.publish(true)"
 						style="display: ${content.published ? 'none' : 'block'}">${t['publish']}</button>
 				</div>
 			</div>
 		</div>
 	</c:if>
-	
+
 	<cms:relatedBox saved="${content.roles}" controller="${RoleController}"
-		inputName="content.roles[].id" name="role" listAll="${roleList}"
-		title="${t['permission']}" multiple="true">
-		sdf	
+		inputName="content.roles[].id" name="role" listAll="${roleList}" title="${t['permission']}"
+		multiple="true">
+		<div class="form-group">
+			<label>${t['role.accessLevel']}</label>
+			<select class="selectpicker" name="content.accessLevel">
+				<option value="">${t['all']}</option>
+				<c:forEach var="i" begin="0" end="9">
+					<option value="${i}">${i}</option>
+				</c:forEach>
+			</select>
+		</div>
 	</cms:relatedBox>
 
-	<cms:relatedBox saved="${content.category}"
-		controller="${CategoryController}" inputName="content.category.id"
-		name="category" listAll="${categoryList}" title="${t['category']}" />
+	<cms:relatedBox saved="${content.category}" controller="${CategoryController}"
+		inputName="content.category.id" name="category" listAll="${categoryList}" title="${t['category']}">
+		<div class="radio">
+			<label>
+				<input type="radio" name="content.category.id" value="" checked/>
+				${t['uncategorized']}
+			</label>
+		</div>
+	</cms:relatedBox>
 
-	<cms:relatedBox saved="${content.tags}" controller="${TagController}"
-		inputName="content.tags[].id" name="tag" listAll="${tagList}"
-		title="${t['tag']}" multiple="true" />
+	<cms:relatedBox saved="${content.tags}" controller="${TagController}" inputName="content.tags[].id"
+		name="tag" listAll="${tagList}" title="${t['tag']}" multiple="true" />
 
 </div>

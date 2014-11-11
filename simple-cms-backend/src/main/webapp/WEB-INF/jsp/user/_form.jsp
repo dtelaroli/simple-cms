@@ -32,7 +32,7 @@
 	<c:if test="${not empty user.id}">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">${t['user.properties']}</h3>
+				<h3 class="panel-title">${t['properties']}</h3>
 			</div>
 			<div class="panel-body">
 				<div class="form-group">

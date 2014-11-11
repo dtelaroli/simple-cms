@@ -10,6 +10,11 @@
 	});
 
 	var Content = {
+		init: function() {
+			$('.selectpicker').selectpicker();
+			$('.selectpicker').selectpicker('val', '${content.accessLevel}');
+		},
+		
 		publish : function(publish) {
 			Backend.Ajax.post('${linkTo[info.controller].publish()}', {
 				id : '${content.id}',
@@ -26,4 +31,8 @@
 			'#draft,#publish');
 		}
 	};
+	
+	$(document).ready(function() {
+		Content.init();
+	});
 </script>

@@ -16,6 +16,8 @@
 		<h3 class="panel-title">${title}</h3>
 	</div>
 	<div class="panel-body">
+		<jsp:doBody/>
+		
 		<c:forEach var="item" items="${listAll}">
 			<div class="${type}">
 				<label> 
@@ -33,8 +35,6 @@
 				<button id="${name}button" class="btn btn-primary" type="button" onclick="Backend.Related.add('${name}', '${linkTo[controller].save}')">${t['action.add']}</button>
 			</span>
 		</div>
-		
-		<jsp:doBody/>
 	</div>
 </div>
 
