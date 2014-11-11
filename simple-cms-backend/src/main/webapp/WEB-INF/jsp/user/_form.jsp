@@ -44,11 +44,9 @@
 					${user.updatedAt.time}
 				</div>
 				<div class="form-group">
-					<button id="inactive" class="btn btn-default" type="button"
-						onclick="User.active(false)"
+					<button id="inactive" class="btn btn-default" type="button"	onclick="User.active(false)"
 						style="display: ${user.active ? 'block' : 'none'}">${t['inactive']}</button>
-					<button id="active" class="btn btn-default" type="button"
-						onclick="User.active(true)"
+					<button id="active" class="btn btn-default" type="button" onclick="User.active(true)"
 						style="display: ${user.active ? 'none' : 'block'}">${t['active']}</button>
 				</div>
 			</div>
@@ -63,19 +61,18 @@
 			<c:forEach var="item" items="${roleList}">
 				<div class="checkbox">
 					<label> 
-						<c:set var="checked"
-							value="${user.roles.contains(item) ? 'checked': ''}" />
-						<input type="checkbox" name="user.roles[].id" value="${item.id}" ${checked} /> ${item.accessLevel}: ${item.name}
+						<c:set var="checked" value="${user.roles.contains(item) ? 'checked': ''}" />
+						<input type="checkbox" name="user.roles[].id" value="${item.id}" ${checked} /> 
+						${item.accessLevel}: ${item.name}
 					</label>
 				</div>
 			</c:forEach>
 			<div id="roleContainer"></div>
 			<div class="input-group input-group-sm">
-				<input type="text" id="roleInput" class="form-control"
-					placeholder="Add new item" maxlength="80" /> 
+				<input type="text" id="roleInput" class="form-control" placeholder="Add new item" maxlength="80" /> 
 				<span class="input-group-btn">
 					<button id="rolebutton" class="btn btn-primary" type="button"
-					onclick="Backend.Related.add('role', '${linkTo[RoleController].save}')">${t['action.add']}</button>
+						onclick="Backend.Related.add('role', '${linkTo[RoleController].save}')">${t['action.add']}</button>
 				</span>
 			</div>
 		</div>
