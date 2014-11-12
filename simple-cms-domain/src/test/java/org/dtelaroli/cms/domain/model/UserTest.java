@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import br.com.caelum.vraptor.actions.core.model.Tenant;
+
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.config.GlobalProperties;
 

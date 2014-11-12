@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
+import br.com.caelum.vraptor.actions.core.model.Tenant;
+
 import com.avaje.ebean.Query;
 import com.avaje.ebean.config.GlobalProperties;
 import com.avaje.ebean.event.BeanPersistController;
@@ -44,15 +46,18 @@ public class TenantBeanQueryAdapter implements BeanQueryAdapter, BeanPersistCont
 	private void setTenant(BeanPersistRequest<?> request) {
 		try {
 			Object bean = request.getBean();
-			if(!(bean instanceof Tenant)) {
+			if(isNotTenantType(bean)) {
 				Field field = bean.getClass().getDeclaredField("tenant");
 				field.setAccessible(true);
 				Tenant tenant = getTenant();
 				field.set(request.getBean(), tenant);
 			}
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
+	}
+
+	private boolean isNotTenantType(Object bean) {
+		return !(bean instanceof Tenant);
 	}
 
 	@Override

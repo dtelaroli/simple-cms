@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.vraptor.actions.api.db.IModel;
+import br.com.caelum.vraptor.actions.core.model.Tenant;
 
 @Entity
 public class Tag implements IModel {

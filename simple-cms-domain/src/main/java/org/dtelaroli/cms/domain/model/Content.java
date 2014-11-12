@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import br.com.caelum.vraptor.actions.core.model.Model;
+
 @Entity
 public class Content extends Model {
 
