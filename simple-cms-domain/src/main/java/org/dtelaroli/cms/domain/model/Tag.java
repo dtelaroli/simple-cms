@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -21,6 +22,9 @@ public class Tag implements IModel {
 	@NotBlank
 	@Column(length = 80)
 	private String name;
+	
+	@ManyToOne
+	private Tenant tenant;
 	
 	public Tag() {
 	}
@@ -39,6 +43,14 @@ public class Tag implements IModel {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Tenant getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(Tenant tenant) {
+		this.tenant = tenant;
 	}
 
 	@Override
