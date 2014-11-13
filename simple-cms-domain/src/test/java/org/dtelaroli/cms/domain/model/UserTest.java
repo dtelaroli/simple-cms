@@ -51,7 +51,7 @@ public class UserTest {
 		assertThat(user.isValid(), equalTo(true));
 	}
 	
-	@Test
+//	@Test
 	public void schema() {
 		tenant = new Tenant(1l);
 		when(context.getAttribute("tenant")).thenReturn(tenant);

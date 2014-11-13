@@ -90,5 +90,46 @@ public class User extends Model {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (active ? 1231 : 1237);
+		result = prime * result + ((confirm == null) ? 0 : confirm.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (active != other.active)
+			return false;
+		if (confirm == null) {
+			if (other.confirm != null)
+				return false;
+		} else if (!confirm.equals(other.confirm))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		return true;
+	}
 	
 }
