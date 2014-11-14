@@ -26,3 +26,4 @@ target/
 **/h2*.sql
 h2*.sql
 **/*.db
+simple-*/.gitignore
