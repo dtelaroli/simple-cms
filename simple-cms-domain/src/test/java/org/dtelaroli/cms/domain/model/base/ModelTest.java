@@ -41,13 +41,14 @@ public class ModelTest {
 	}
 
 	@Test
-	public void shouldSetUpdatedAtOnUpdate() {
+	public void shouldSetUpdatedAtOnUpdate() throws InterruptedException {
 		Ebean.save(model);
 		assertThat(model.getId(), greaterThan(0L));
 		assertThat(model.getCreatedAt(), notNullValue());
 		assertThat(model.getUpdatedAt(), notNullValue());
 		assertThat(model.getCreatedAt(), equalTo(model.getUpdatedAt()));
 
+		Thread.sleep(200);
 		model.setName("bar");
 		Ebean.update(model);
 		assertThat(model.getCreatedAt(), lessThan(model.getUpdatedAt()));
