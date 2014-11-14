@@ -2,10 +2,10 @@ package models;
 
 import javax.persistence.Entity;
 
-import org.dtelaroli.cms.domain.model.base.Model;
+import org.dtelaroli.cms.domain.model.base.LoggedModel;
 
 @Entity
-public class MyModel extends Model {
+public class MyModel extends LoggedModel {
 
 	private static final long serialVersionUID = -5544370617414899837L;
 

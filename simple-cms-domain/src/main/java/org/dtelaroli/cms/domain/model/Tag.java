@@ -2,40 +2,20 @@ package org.dtelaroli.cms.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
-import org.dtelaroli.cms.domain.model.base.Tenant;
+import org.dtelaroli.cms.domain.model.base.TenantModel;
 import org.hibernate.validator.constraints.NotBlank;
 
-import br.com.caelum.vraptor.actions.api.db.IModel;
-
 @Entity
-public class Tag implements IModel {
+public class Tag extends TenantModel {
 
 	private static final long serialVersionUID = 4468072851039659390L;
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
 	@NotBlank
 	@Column(length = 80)
 	private String name;
 	
-	@ManyToOne
-	private Tenant tenant;
-	
 	public Tag() {
-	}
-	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
@@ -46,17 +26,4 @@ public class Tag implements IModel {
 		this.name = name;
 	}
 
-	public Tenant getTenant() {
-		return tenant;
-	}
-
-	public void setTenant(Tenant tenant) {
-		this.tenant = tenant;
-	}
-
-	@Override
-	public String toString() {
-		return "Tag [id=" + id + ", name=" + name + "]";
-	}
-	
 }

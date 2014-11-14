@@ -2,21 +2,14 @@ package org.dtelaroli.cms.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
+import org.dtelaroli.cms.domain.model.base.TenantModel;
 import org.hibernate.validator.constraints.NotBlank;
 
-import br.com.caelum.vraptor.actions.api.db.IModel;
-
 @Entity
-public class Category implements IModel {
+public class Category extends TenantModel {
 
-	private static final long serialVersionUID = 6718534370518599189L;
-
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private static final long serialVersionUID = 923970973683717179L;
 	
 	@NotBlank
 	@Column(length = 80)
@@ -25,25 +18,12 @@ public class Category implements IModel {
 	public Category() {
 	}
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
 	}
 
 }

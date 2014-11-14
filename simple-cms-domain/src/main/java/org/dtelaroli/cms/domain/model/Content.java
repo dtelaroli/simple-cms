@@ -11,11 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.dtelaroli.cms.domain.model.base.Model;
+import org.dtelaroli.cms.domain.model.base.TenantLoggedModel;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class Content extends Model {
+public class Content extends TenantLoggedModel {
 
 	private static final long serialVersionUID = 1885202008039612248L;
 

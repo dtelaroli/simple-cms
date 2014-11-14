@@ -4,8 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
+import com.google.common.base.Objects;
+
 @Entity
-public class Tenant extends Model {
+public class Tenant extends LoggedModel {
 
 	private static final long serialVersionUID = 5840468752604699321L;
 
@@ -41,30 +43,22 @@ public class Tenant extends Model {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (active ? 1231 : 1237);
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		return Objects.hashCode(getId());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Tenant other = (Tenant) obj;
-		if (active != other.active)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
+		return Objects.equal(this, obj);
+	}
+	
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.omitNullValues()
+				.addValue(getId())
+				.addValue(name)
+				.addValue(active)
+				.toString();
 	}
 	
 }

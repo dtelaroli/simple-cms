@@ -2,23 +2,16 @@ package org.dtelaroli.cms.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.dtelaroli.cms.domain.model.base.TenantLoggedModel;
 import org.hibernate.validator.constraints.NotBlank;
 
-import br.com.caelum.vraptor.actions.api.db.IModel;
-
 @Entity
-public class Role implements IModel {
+public class Role extends TenantLoggedModel {
 
 	private static final long serialVersionUID = -8140627201032571675L;
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
 	@NotBlank
 	@Column(length = 80)
 	private String name;
@@ -29,14 +22,6 @@ public class Role implements IModel {
 	public Role() {
 	}
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}

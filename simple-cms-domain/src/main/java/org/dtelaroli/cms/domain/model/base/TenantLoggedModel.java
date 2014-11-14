@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import com.google.common.base.Objects;
 
 @MappedSuperclass
-public class TenantModel extends Model {
+public class TenantLoggedModel extends LoggedModel {
 
 	private static final long serialVersionUID = -1438057629986553768L;
 	
@@ -16,10 +16,10 @@ public class TenantModel extends Model {
 	@NotNull
 	private Tenant tenant;
 
-	public TenantModel() {
+	public TenantLoggedModel() {
 	}
 	
-	public TenantModel(Tenant tenant) {
+	public TenantLoggedModel(Tenant tenant) {
 		this.tenant = tenant;
 	}
 
@@ -33,7 +33,7 @@ public class TenantModel extends Model {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(getId());
+		return Objects.hashCode(getId(), tenant);
 	}
 
 	@Override
@@ -46,6 +46,8 @@ public class TenantModel extends Model {
 		return Objects.toStringHelper(this)
 				.omitNullValues()
 				.addValue(getId())
+				.addValue(getCreatedAtDate())
+				.addValue(getUpdatedAtDate())
 				.addValue(tenant)
 				.toString();
 	}

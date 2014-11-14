@@ -2,20 +2,19 @@ package org.dtelaroli.cms.domain.model.base;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class TenantModelTest {
+public class TenantLoggedModelTest {
 
-	private TenantModel model;
+	private TenantLoggedModel model;
 	private Tenant tenant;
 	
 	@Before
 	public void setUp() throws Exception {
-		model = new TenantModel();
+		model = new TenantLoggedModel();
 		tenant = new Tenant();
 	}
 
@@ -26,19 +25,16 @@ public class TenantModelTest {
 	}
 	
 	@Test
-	public void shouldBeEqual() {
-		assertThat(model, equalTo(model));
+	public void shouldSetData() {
+		model = new TenantLoggedModel(tenant);
+		assertThat(model.getTenant(), equalTo(tenant));
 	}
 	
 	@Test
 	public void shouldReturnToString() {
-		assertThat(model.toString(), containsString("TenantModel{"));
-	}
-	
-	@Test
-	public void shouldConstructWithTenant() {
-		model = new TenantModel(new Tenant());
-		assertThat(model.getTenant(), notNullValue());
+		model.setId(1L);
+		
+		assertThat(model.toString(), containsString("TenantLoggedModel{1"));
 	}
 
 }
