@@ -37,7 +37,7 @@ public class RoleControllerTest {
 		controller.save(role);
 		
 		verify(act).as(persist());
-		assertThat(result.serializedResult(), containsString("{\"id\":1,\"name\":\"name\",\"accessLevel\":0}"));
+		assertThat(result.serializedResult(), containsString("{\"name\":\"name\",\"accessLevel\":0,\"id\":1}"));
 	}
 	
 }

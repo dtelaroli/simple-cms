@@ -37,7 +37,7 @@ public class CategoryControllerTest {
 		controller.save(category);
 		
 		verify(act).as(persist());
-		assertThat(result.serializedResult(), containsString("{\"id\":1,\"name\":\"Category\"}"));
+		assertThat(result.serializedResult(), containsString("{\"name\":\"Category\",\"id\":1}"));
 	}
 	
 }
