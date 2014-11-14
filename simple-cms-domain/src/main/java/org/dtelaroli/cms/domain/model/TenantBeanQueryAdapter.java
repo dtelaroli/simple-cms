@@ -5,7 +5,7 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
-import br.com.caelum.vraptor.actions.core.model.Tenant;
+import org.dtelaroli.cms.domain.model.base.Tenant;
 
 import com.avaje.ebean.Query;
 import com.avaje.ebean.config.GlobalProperties;

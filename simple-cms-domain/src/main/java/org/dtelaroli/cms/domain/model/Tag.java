@@ -7,10 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.dtelaroli.cms.domain.model.base.Tenant;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.vraptor.actions.api.db.IModel;
-import br.com.caelum.vraptor.actions.core.model.Tenant;
 
 @Entity
 public class Tag implements IModel {

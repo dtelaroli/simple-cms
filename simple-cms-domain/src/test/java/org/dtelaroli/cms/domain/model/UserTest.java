@@ -7,12 +7,11 @@ import static org.mockito.Mockito.when;
 
 import javax.servlet.ServletContext;
 
+import org.dtelaroli.cms.domain.model.base.Tenant;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import br.com.caelum.vraptor.actions.core.model.Tenant;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.config.GlobalProperties;
@@ -51,9 +50,10 @@ public class UserTest {
 		assertThat(user.isValid(), equalTo(true));
 	}
 	
-//	@Test
+	@Test
 	public void schema() {
-		tenant = new Tenant(1l);
+		tenant = new Tenant(555L);
+		tenant.setName("tenant");
 		when(context.getAttribute("tenant")).thenReturn(tenant);
 		when(context.getRealPath("WEB-INF/ebean")).thenReturn("target");
 		
@@ -71,6 +71,6 @@ public class UserTest {
 		Tag find = Ebean.find(Tag.class, 1L);
 		assertThat(find, notNullValue());
 		assertThat(find.getTenant(), notNullValue());
-		assertThat(find.getTenant().getId(), equalTo(1L));
+		assertThat(find.getTenant().getId(), equalTo(555L));
 	}
 }

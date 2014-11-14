@@ -11,10 +11,9 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.dtelaroli.cms.domain.model.base.Model;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-
-import br.com.caelum.vraptor.actions.core.model.Model;
 
 @Entity
 public class User extends Model {

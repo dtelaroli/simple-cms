@@ -81,7 +81,7 @@
 							<goal>enhance</goal>
 						</goals>
 						<configuration>
-							<packages>org.dtelaroli.cms.domain.model.**</packages>
+							<packages>org.dtelaroli.cms.domain.model.**,models.**</packages>
 							<transformArgs>debug=9</transformArgs>
 							<classSource>${project.build.outputDirectory}</classSource>
 							<classDestination>${project.build.outputDirectory}</classDestination>
