@@ -17,8 +17,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Content extends TenantLoggedModel {
 
-	private static final long serialVersionUID = 1885202008039612248L;
-
 	@Column(length = 255)
 	@NotBlank
 	private String title;

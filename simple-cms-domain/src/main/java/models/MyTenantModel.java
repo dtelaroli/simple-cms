@@ -2,17 +2,17 @@ package models;
 
 import javax.persistence.Entity;
 
-import org.dtelaroli.cms.domain.model.base.LoggedModel;
+import org.dtelaroli.cms.domain.model.base.TenantModel;
 
 @Entity
-public class MyModel extends LoggedModel {
-
+public class MyTenantModel extends TenantModel {
+	
 	private String name;
 
-	public MyModel() {
+	public MyTenantModel() {
 	}
 	
-	public MyModel(long id) {
+	public MyTenantModel(long id) {
 		setId(id);
 	}
 

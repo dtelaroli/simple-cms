@@ -9,8 +9,6 @@ import com.google.common.base.Objects;
 @Entity
 public class Tenant extends LoggedModel {
 
-	private static final long serialVersionUID = 5840468752604699321L;
-
 	@NotNull
 	@Column(length = 80)
 	private String name;

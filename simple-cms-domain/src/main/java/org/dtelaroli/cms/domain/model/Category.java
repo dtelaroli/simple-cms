@@ -9,8 +9,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Category extends TenantModel {
 
-	private static final long serialVersionUID = 923970973683717179L;
-	
 	@NotBlank
 	@Column(length = 80)
 	private String name;

@@ -9,8 +9,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Tag extends TenantModel {
 
-	private static final long serialVersionUID = 4468072851039659390L;
-
 	@NotBlank
 	@Column(length = 80)
 	private String name;

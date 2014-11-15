@@ -10,8 +10,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class Role extends TenantLoggedModel {
 
-	private static final long serialVersionUID = -8140627201032571675L;
-
 	@NotBlank
 	@Column(length = 80)
 	private String name;

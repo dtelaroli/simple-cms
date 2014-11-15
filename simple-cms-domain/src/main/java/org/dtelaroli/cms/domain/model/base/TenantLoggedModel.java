@@ -10,8 +10,6 @@ import com.google.common.base.Objects;
 @MappedSuperclass
 public class TenantLoggedModel extends LoggedModel {
 
-	private static final long serialVersionUID = -1438057629986553768L;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull
 	private Tenant tenant;

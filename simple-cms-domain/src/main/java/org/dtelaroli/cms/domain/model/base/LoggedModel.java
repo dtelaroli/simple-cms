@@ -9,13 +9,12 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import com.google.common.base.Objects;
 
 @MappedSuperclass
 public class LoggedModel extends Model {
-
-	private static final long serialVersionUID = 6028017372969465837L;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(updatable = false)
@@ -23,6 +22,9 @@ public class LoggedModel extends Model {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar updatedAt;
+	
+	@Version
+	private Integer version;
 
 	public LoggedModel() {
 	}
@@ -45,6 +47,10 @@ public class LoggedModel extends Model {
 		return updatedAt;
 	}
 
+	public Integer getVersion() {
+		return version;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(getId());
@@ -53,16 +59,6 @@ public class LoggedModel extends Model {
 	@Override
 	public boolean equals(Object obj) {
 		return Objects.equal(this, obj);
-	}
-	
-	@Override
-	public String toString() {
-		return Objects.toStringHelper(this)
-				.omitNullValues()
-				.addValue(getId())
-				.addValue(getCreatedAtDate())
-				.addValue(getUpdatedAtDate())
-				.toString();
 	}
 
 	public Object getUpdatedAtDate() {
@@ -78,5 +74,15 @@ public class LoggedModel extends Model {
 		}
 		return createdAt.getTime();
 	}
-	
+
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.omitNullValues()
+				.addValue(getId())
+				.addValue(getCreatedAtDate())
+				.addValue(getUpdatedAtDate())
+				.toString();
+	}
+
 }

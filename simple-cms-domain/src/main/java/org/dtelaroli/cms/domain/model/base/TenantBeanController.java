@@ -1,0 +1,103 @@
+package org.dtelaroli.cms.domain.model.base;
+
+import java.lang.reflect.Field;
+import java.util.Set;
+
+import javax.enterprise.inject.Vetoed;
+import javax.servlet.ServletContext;
+
+import com.avaje.ebean.Query;
+import com.avaje.ebean.config.GlobalProperties;
+import com.avaje.ebean.event.BeanPersistController;
+import com.avaje.ebean.event.BeanPersistRequest;
+import com.avaje.ebean.event.BeanQueryAdapter;
+import com.avaje.ebean.event.BeanQueryRequest;
+
+@Vetoed
+public class TenantBeanController implements BeanQueryAdapter, BeanPersistController {
+
+	private static final String SESSION_ATTRIBUTE = "_tenant";
+	private static final String TENANT = "tenant";
+
+	@Override
+	public boolean isRegisterFor(Class<?> cls) {
+		return TenantModel.class.isAssignableFrom(cls) || TenantLoggedModel.class.isAssignableFrom(cls);
+	}
+
+	@Override
+	public int getExecutionOrder() {
+		return 0;
+	}
+
+	@Override
+	public void preQuery(BeanQueryRequest<?> request) {
+		Query<?> query = request.getQuery();
+		query.where().eq(TENANT, getTenant());
+	}
+
+	private Tenant getTenant() {
+		ServletContext context = GlobalProperties.getServletContext();
+		return (Tenant) context.getAttribute(SESSION_ATTRIBUTE);
+	}
+
+	@Override
+	public boolean preInsert(BeanPersistRequest<?> request) {
+		setTenant(request);
+		return true;
+	}
+
+	private void setTenant(BeanPersistRequest<?> request) {
+		Tenant tenant = getTenant();
+		
+		Object bean = request.getBean();
+		Field field = getTenantField(bean.getClass());
+		field.setAccessible(true);
+		try {
+			field.set(request.getBean(), tenant);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private Field getTenantField(Class<?> cls) {
+		Field field = null;
+		
+		try {
+			field = cls.getDeclaredField(TENANT);
+		} catch (NoSuchFieldException | SecurityException e) {
+			if(!cls.getSuperclass().equals(Object.class)) {
+				return getTenantField(cls.getSuperclass());
+			}
+		}
+		
+		return field;
+	}
+
+	@Override
+	public boolean preUpdate(BeanPersistRequest<?> request) {
+		setTenant(request);
+		return true;
+	}
+
+	@Override
+	public boolean preDelete(BeanPersistRequest<?> request) {
+		return true;
+	}
+
+	@Override
+	public void postInsert(BeanPersistRequest<?> request) {
+	}
+
+	@Override
+	public void postUpdate(BeanPersistRequest<?> request) {
+	}
+
+	@Override
+	public void postDelete(BeanPersistRequest<?> request) {
+	}
+
+	@Override
+	public void postLoad(Object bean, Set<String> includedProperties) {
+	}
+
+}

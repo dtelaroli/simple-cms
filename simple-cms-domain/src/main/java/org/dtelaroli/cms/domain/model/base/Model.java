@@ -5,14 +5,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import com.google.common.base.Objects;
-
 import br.com.caelum.vraptor.actions.api.db.IModel;
+
+import com.google.common.base.Objects;
 
 @MappedSuperclass
 public class Model implements IModel {
-
-	private static final long serialVersionUID = 6028017372969465837L;
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

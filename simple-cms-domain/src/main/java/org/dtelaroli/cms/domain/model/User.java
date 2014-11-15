@@ -18,8 +18,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 public class User extends TenantLoggedModel {
 
-	private static final long serialVersionUID = 44587093069375546L;
-
 	@NotBlank
 	@Email
 	@Column(length = 120, unique = true)
