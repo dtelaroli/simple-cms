@@ -3,7 +3,6 @@ package org.dtelaroli.cms.domain.model.base;
 import java.lang.reflect.Field;
 import java.util.Set;
 
-import javax.enterprise.inject.Vetoed;
 import javax.servlet.ServletContext;
 
 import com.avaje.ebean.Query;
@@ -13,7 +12,6 @@ import com.avaje.ebean.event.BeanPersistRequest;
 import com.avaje.ebean.event.BeanQueryAdapter;
 import com.avaje.ebean.event.BeanQueryRequest;
 
-@Vetoed
 public class TenantBeanController implements BeanQueryAdapter, BeanPersistController {
 
 	private static final String SESSION_ATTRIBUTE = "_tenant";
@@ -37,7 +35,13 @@ public class TenantBeanController implements BeanQueryAdapter, BeanPersistContro
 
 	private Tenant getTenant() {
 		ServletContext context = GlobalProperties.getServletContext();
-		return (Tenant) context.getAttribute(SESSION_ATTRIBUTE);
+		Tenant tenant = (Tenant) context.getAttribute(SESSION_ATTRIBUTE);
+		
+		if(tenant == null) {
+			throw new IllegalStateException("Tenant is null. Session is configured correctly?");
+		}
+		
+		return tenant;
 	}
 
 	@Override

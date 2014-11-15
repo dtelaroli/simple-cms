@@ -7,6 +7,8 @@ import org.dtelaroli.cms.domain.model.base.Tenant;
 @Specializes
 public class TenantUserSession extends UserSession {
 
+	private static final long serialVersionUID = -7368808727350559508L;
+	
 	private Tenant tenant;
 
 	public Tenant getTenant() {

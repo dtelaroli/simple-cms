@@ -3,15 +3,13 @@ package org.dtelaroli.cms.domain.model.base;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
 
 import com.google.common.base.Objects;
 
 @MappedSuperclass
 public class TenantModel extends Model {
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Tenant tenant;
 
 	public TenantModel() {
