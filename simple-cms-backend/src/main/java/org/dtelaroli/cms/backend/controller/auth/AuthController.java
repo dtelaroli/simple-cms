@@ -1,40 +1,38 @@
 package org.dtelaroli.cms.backend.controller.auth;
 
+import static br.com.caelum.vraptor.actions.api.Acts.session;
+
 import javax.inject.Inject;
 
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationException;
-import org.apache.shiro.subject.Subject;
+import org.dtelaroli.simple.cms.base.component.RequestInfo;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.config.Configuration;
+import br.com.caelum.vraptor.actions.api.Act;
 import br.com.caelum.vraptor.security.AuthorizationRestrictionListener;
 
 @Controller
 public class AuthController implements AuthorizationRestrictionListener {
    
-	private final Result result;
-	private final Subject currentUser;
-	private final Configuration cfg;
+	private final Act act;
+	private final RequestInfo info;
     
     protected AuthController() {
-    	this(null, null, null);
+    	this(null, null);
 	}
     
     @Inject
-    public AuthController(Result result, Subject currentUser, Configuration cfg) {
-		this.result = result;
-		this.currentUser = currentUser;
-		this.cfg = cfg;
+    public AuthController(Act act, RequestInfo info) {
+		this.act = act;
+		this.info = info;
 	}
 
     @Override
     public void onAuthorizationRestriction(AuthorizationException e) {
-        result.include("error", e.getLocalizedMessage());
-        result.redirectTo(this).index();     
+        act.result().include("error", e.getLocalizedMessage());
+        act.result().redirectTo(this).index();     
     }
     
     @Get
@@ -43,13 +41,12 @@ public class AuthController implements AuthorizationRestrictionListener {
     
     @Post
     public void login(String username, String password, boolean remember) {
-		currentUser.login(new UsernamePasswordToken(username, password, remember));
-    	result.redirectTo(cfg.getApplicationPath());
+    	act.as(session()).login(username, password, remember).redirectTo(info.getContextPath());
     }
     
-    @Get
+	@Get
     public void logout() {
-        currentUser.logout();
+		act.as(session()).logout().redirectTo(info.getContextPath());
     }
     
 }
