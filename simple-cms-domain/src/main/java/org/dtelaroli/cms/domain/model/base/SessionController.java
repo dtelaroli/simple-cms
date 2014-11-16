@@ -1,4 +1,4 @@
-package org.dtelaroli.simple.cms.base.component;
+package org.dtelaroli.cms.domain.model.base;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import br.com.caelum.vraptor.events.ControllerFound;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.config.GlobalProperties;
 
-//@SessionScoped
+@SessionScoped
 public class SessionController implements Serializable {
 	
 	private static final long serialVersionUID = 4645785522740930314L;
@@ -23,7 +23,7 @@ public class SessionController implements Serializable {
 	public SessionController() {
 	}
 	
-//	@PostConstruct
+	@PostConstruct
 	public void sessionStarted() {
 		tenant = new Tenant();
 		tenant.setName("Default");

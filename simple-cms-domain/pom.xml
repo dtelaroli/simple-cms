@@ -65,6 +65,12 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.181</version>
 		</dependency>
+		<dependency>
+			<groupId>br.com.caelum.vraptor</groupId>
+			<artifactId>vraptor-glue</artifactId>
+			<version>4.0.0-RC1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

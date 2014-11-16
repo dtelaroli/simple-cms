@@ -2,7 +2,6 @@ package org.dtelaroli.cms.domain.model.base;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
 
 import javax.servlet.ServletContext;
 
@@ -16,9 +15,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import br.com.caelum.vraptor.glue.Glue;
+
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.Query;
-import com.avaje.ebean.config.GlobalProperties;
 
 public class TenantBeanControllerTest {
 
@@ -33,10 +33,10 @@ public class TenantBeanControllerTest {
 		tenant = new Tenant();
 		tenant.setName("tenant");
 		Ebean.save(tenant);
-
-		when(context.getAttribute("_tenant")).thenReturn(tenant);
-		when(context.getRealPath("WEB-INF/ebean")).thenReturn("/ebean");
-		GlobalProperties.setServletContext(context);
+		
+		SessionController sessionController = new SessionController();
+		sessionController.sessionStarted();
+		Glue.put(SessionController.class, sessionController);
 		controller = new TenantBeanController();
 		
 		MyModel myModel = new MyModel();

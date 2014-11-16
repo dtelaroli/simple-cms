@@ -8,6 +8,11 @@ before_install:
 - mvn install
 
 - cd ..
+- git clone https://github.com/caelum/vraptor-glue.git
+- cd vraptor-glue
+- mvn install
+
+- cd ..
 - git clone https://github.com/dtelaroli/actions.git
 - cd actions
 - mvn install
