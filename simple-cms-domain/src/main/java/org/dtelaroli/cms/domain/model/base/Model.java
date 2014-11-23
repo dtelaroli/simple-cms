@@ -10,7 +10,7 @@ import br.com.caelum.vraptor.actions.api.db.IModel;
 import com.google.common.base.Objects;
 
 @MappedSuperclass
-public class Model implements IModel {
+public abstract class Model implements IModel {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -31,11 +31,6 @@ public class Model implements IModel {
 		return Objects.hashCode(getId());
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return Objects.equal(this, obj);
-	}
-	
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this)

@@ -18,6 +18,7 @@ public class TenantTest {
 	public void setUp() throws Exception {
 		model = new Tenant();
 		model.setName("name");
+		model.setSlug("slug");
 	}
 
 	@Test

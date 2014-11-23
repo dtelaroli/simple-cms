@@ -27,6 +27,7 @@ public class SessionController implements Serializable {
 	public void sessionStarted() {
 		tenant = new Tenant();
 		tenant.setName("Default");
+		tenant.setSlug("slug");
 		Ebean.save(tenant);
 	}
 	

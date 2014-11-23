@@ -1,0 +1,1 @@
+<cms:form action="${linkTo[info.controller].login}" method="post" title="Login"/>

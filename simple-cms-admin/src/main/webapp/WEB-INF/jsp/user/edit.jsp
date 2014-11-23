@@ -1,0 +1,1 @@
+<cms:form action="${linkTo[info.controller].update(user)}" method="put" title="${t['user']}"/>

@@ -32,7 +32,7 @@ public class User extends TenantLoggedModel {
 	private String confirm;
 	
 	@NotNull
-	private boolean active = true;
+	private boolean active;
 	
 	@ManyToMany
 	private List<Role> roles = new ArrayList<>();

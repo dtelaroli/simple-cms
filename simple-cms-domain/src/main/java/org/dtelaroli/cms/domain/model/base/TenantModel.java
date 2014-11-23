@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import com.google.common.base.Objects;
 
 @MappedSuperclass
-public class TenantModel extends Model {
+public abstract class TenantModel extends Model {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Tenant tenant;

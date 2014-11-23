@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import com.google.common.base.Objects;
 
 @MappedSuperclass
-public class TenantLoggedModel extends LoggedModel {
+public abstract class TenantLoggedModel extends LoggedModel {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	private Tenant tenant;
@@ -32,11 +32,6 @@ public class TenantLoggedModel extends LoggedModel {
 		return Objects.hashCode(getId(), tenant);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return Objects.equal(this, obj);
-	}
-	
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this)

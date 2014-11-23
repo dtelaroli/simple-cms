@@ -15,7 +15,7 @@ public class TenantModelTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		model = new TenantModel();
+		model = new TenantModel(){};
 		tenant = new Tenant();
 	}
 
@@ -32,12 +32,12 @@ public class TenantModelTest {
 	
 	@Test
 	public void shouldReturnToString() {
-		assertThat(model.toString(), containsString("TenantModel{"));
+		assertThat(model.toString(), containsString("{"));
 	}
 	
 	@Test
 	public void shouldConstructWithTenant() {
-		model = new TenantModel(new Tenant());
+		model = new TenantModel(new Tenant()){};
 		assertThat(model.getTenant(), notNullValue());
 	}
 

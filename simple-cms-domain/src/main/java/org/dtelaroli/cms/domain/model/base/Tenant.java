@@ -14,7 +14,17 @@ public class Tenant extends LoggedModel {
 	private String name;
 	
 	@NotNull
-	private boolean active = true;
+	@Column(length = 80)
+	private String slug;
+	
+	@Column(length = 80)
+	private String description;
+	
+	@Column(length = 80)
+	private String domain;
+	
+	@NotNull
+	private boolean active;
 	
 	public Tenant() {
 	}
@@ -38,17 +48,36 @@ public class Tenant extends LoggedModel {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDomain() {
+		return domain;
+	}
+
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(getId());
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return Objects.equal(this, obj);
-	}
-	
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this)

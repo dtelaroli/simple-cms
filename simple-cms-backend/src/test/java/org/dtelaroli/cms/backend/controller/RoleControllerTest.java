@@ -10,7 +10,7 @@ import org.dtelaroli.cms.domain.model.Role;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.caelum.vraptor.actions.api.test.MockAct;
+import br.com.caelum.vraptor.actions.core.test.MockAct;
 import br.com.caelum.vraptor.util.test.MockSerializationResult;
 
 public class RoleControllerTest {

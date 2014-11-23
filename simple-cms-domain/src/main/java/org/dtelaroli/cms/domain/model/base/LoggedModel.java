@@ -14,7 +14,7 @@ import javax.persistence.Version;
 import com.google.common.base.Objects;
 
 @MappedSuperclass
-public class LoggedModel extends Model {
+public abstract class LoggedModel extends Model {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(updatable = false)
@@ -54,11 +54,6 @@ public class LoggedModel extends Model {
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(getId());
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return Objects.equal(this, obj);
 	}
 
 	public Object getUpdatedAtDate() {

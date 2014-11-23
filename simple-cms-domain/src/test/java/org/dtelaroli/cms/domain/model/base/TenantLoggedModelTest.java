@@ -14,7 +14,7 @@ public class TenantLoggedModelTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		model = new TenantLoggedModel();
+		model = new TenantLoggedModel(){};
 		tenant = new Tenant();
 	}
 
@@ -26,7 +26,7 @@ public class TenantLoggedModelTest {
 	
 	@Test
 	public void shouldSetData() {
-		model = new TenantLoggedModel(tenant);
+		model = new TenantLoggedModel(tenant){};
 		assertThat(model.getTenant(), equalTo(tenant));
 	}
 	
@@ -34,7 +34,7 @@ public class TenantLoggedModelTest {
 	public void shouldReturnToString() {
 		model.setId(1L);
 		
-		assertThat(model.toString(), containsString("TenantLoggedModel{1"));
+		assertThat(model.toString(), containsString("{1"));
 	}
 
 }

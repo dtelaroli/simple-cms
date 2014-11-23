@@ -13,7 +13,7 @@ public class ModelTest {
 
 	@Before
 	public void setUp() throws Exception {
-		model = new Model();
+		model = new Model(){};
 	}
 
 	@Test
@@ -29,7 +29,7 @@ public class ModelTest {
 	
 	@Test
 	public void shouldReturnToString() {
-		assertThat(model.toString(), containsString("Model{"));
+		assertThat(model.toString(), containsString("{"));
 	}
 	
 }

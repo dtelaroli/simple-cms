@@ -32,6 +32,7 @@ public class TenantBeanControllerTest {
 		
 		tenant = new Tenant();
 		tenant.setName("tenant");
+		tenant.setSlug("slug");
 		Ebean.save(tenant);
 		
 		SessionController sessionController = new SessionController();
@@ -49,6 +50,7 @@ public class TenantBeanControllerTest {
 		
 		Tenant tenant2 = new Tenant();
 		tenant2.setName("tenant2");
+		tenant2.setSlug("slug2");
 		Ebean.save(tenant2);
 		MyTenantModel myTenantModel2 = new MyTenantModel();
 		myTenantModel2.setName("myTenantModel2");
@@ -93,7 +95,7 @@ public class TenantBeanControllerTest {
 	@Test
 	public void shouldSetTenantPreQuery() {
 		Query<MyTenantModel> find = Ebean.find(MyTenantModel.class);
-		assertThat(find.findList().size(), equalTo(2));
+		assertThat(find.findList().size(), equalTo(1));
 	}
 	
 	@Test

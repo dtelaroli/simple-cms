@@ -52,7 +52,11 @@ public class TenantBeanController implements BeanQueryAdapter, BeanPersistContro
 		Field field = getTenantField(bean.getClass());
 		field.setAccessible(true);
 		try {
-			field.set(request.getBean(), tenant);
+			Object value = field.get(bean);
+			
+			if(value == null) {
+				field.set(request.getBean(), tenant);
+			}
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
