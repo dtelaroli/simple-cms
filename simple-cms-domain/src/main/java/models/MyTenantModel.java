@@ -2,11 +2,13 @@ package models;
 
 import javax.persistence.Entity;
 
-import org.dtelaroli.cms.domain.model.base.TenantModel;
+import org.dtelaroli.cms.domain.model.base.TenantLoggedModel;
 
 @Entity
-public class MyTenantModel extends TenantModel {
+public class MyTenantModel extends TenantLoggedModel {
 	
+	private static final long serialVersionUID = -3027874225601307107L;
+
 	private String name;
 
 	public MyTenantModel() {

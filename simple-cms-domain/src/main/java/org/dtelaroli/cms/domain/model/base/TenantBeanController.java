@@ -51,7 +51,7 @@ public class TenantBeanController implements BeanQueryAdapter, BeanPersistContro
 	private void setTenant(BeanPersistRequest<?> request) {
 		if(request.getBean() instanceof TenantLoggedModel) {
 			TenantLoggedModel bean = (TenantLoggedModel) request.getBean();
-			bean.setTenant(getTenant());
+			bean.setTenantIfNull(getTenant());
 		}
 	}
 

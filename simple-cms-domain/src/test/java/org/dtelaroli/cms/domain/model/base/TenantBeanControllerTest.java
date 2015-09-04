@@ -35,10 +35,11 @@ public class TenantBeanControllerTest {
 		tenant.setSlug("slug");
 		Ebean.save(tenant);
 		
+		controller = new TenantBeanController();
+		
 		SessionController sessionController = new SessionController();
 		sessionController.sessionStarted();
 		Glue.put(SessionController.class, sessionController);
-		controller = new TenantBeanController();
 		
 		MyModel myModel = new MyModel();
 		myModel.setName("myModel");
@@ -56,7 +57,6 @@ public class TenantBeanControllerTest {
 		myTenantModel2.setName("myTenantModel2");
 		myTenantModel2.setTenant(tenant2);
 		Ebean.save(myTenantModel2);
-
 	}
 	
 	@After

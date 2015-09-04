@@ -42,4 +42,10 @@ public abstract class TenantLoggedModel extends LoggedModel {
 				.addValue(tenant)
 				.toString();
 	}
+
+	public void setTenantIfNull(Tenant tenant) {
+		if(this.tenant == null) {
+			this.tenant = tenant;
+		}
+	}
 }
