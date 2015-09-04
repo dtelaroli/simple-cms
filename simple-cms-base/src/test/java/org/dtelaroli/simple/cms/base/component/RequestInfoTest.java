@@ -16,17 +16,17 @@ import org.mockito.MockitoAnnotations;
 import br.com.caelum.vraptor.controller.BeanClass;
 import br.com.caelum.vraptor.controller.DefaultBeanClass;
 import br.com.caelum.vraptor.controller.DefaultControllerMethod;
-import br.com.caelum.vraptor.events.ControllerFound;
+import br.com.caelum.vraptor.events.InterceptorsReady;
 import br.com.caelum.vraptor.events.VRaptorInitialized;
 
 public class RequestInfoTest {
 
 	private RequestInfo info;
-	@Mock private ControllerFound controllerFound;
 	private BeanClass controller;
 	private DefaultControllerMethod method;
 	@Mock private VRaptorInitialized vRaptorInitialized;
 	@Mock private ServletContext context;
+	@Mock private InterceptorsReady interceptorsReady;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -35,8 +35,7 @@ public class RequestInfoTest {
 		controller = new DefaultBeanClass(MessageController.class);
 		method = new DefaultControllerMethod(controller, MessageController.class.getMethod("e500"));
 		
-		when(controllerFound.getController()).thenReturn(controller);
-		when(controllerFound.getMethod()).thenReturn(method);
+		when(interceptorsReady.getControllerMethod()).thenReturn(method);
 		when(context.getContextPath()).thenReturn("context");
 		
 		info = new RequestInfo();
@@ -44,14 +43,14 @@ public class RequestInfoTest {
 
 	@Test
 	public void shouldSetController() {
-		info.controllerFound(controllerFound);
+		info.ready(interceptorsReady);
 		
 		assertThat(info.getController().getType(), typeCompatibleWith(MessageController.class));
 	}
 	
 	@Test
 	public void shouldSetMethod() {
-		info.controllerFound(controllerFound);
+		info.ready(interceptorsReady);
 		
 		assertThat(info.getAction(), equalTo("e500"));
 	}

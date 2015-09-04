@@ -39,6 +39,7 @@ public class Tenant extends LoggedModel {
 
 	public void setName(String name) {
 		this.name = name;
+		setSlug(name);
 	}
 
 	public boolean isActive() {

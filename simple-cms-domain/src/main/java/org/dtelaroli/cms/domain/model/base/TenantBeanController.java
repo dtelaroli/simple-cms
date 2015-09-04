@@ -1,6 +1,5 @@
 package org.dtelaroli.cms.domain.model.base;
 
-import java.lang.reflect.Field;
 import java.util.Set;
 
 import com.avaje.ebean.Query;
@@ -32,6 +31,10 @@ public class TenantBeanController implements BeanQueryAdapter, BeanPersistContro
 	private Tenant getTenant() {
 		SessionController controller = SessionStatik.session();
 		
+		if(controller == null) {
+			return null;
+		}
+		
 		if(controller.getTenant() == null) {
 			throw new IllegalStateException("Tenant is null. Session is configured correctly?");
 		}
@@ -46,34 +49,10 @@ public class TenantBeanController implements BeanQueryAdapter, BeanPersistContro
 	}
 
 	private void setTenant(BeanPersistRequest<?> request) {
-		Tenant tenant = getTenant();
-		
-		Object bean = request.getBean();
-		Field field = getTenantField(bean.getClass());
-		field.setAccessible(true);
-		try {
-			Object value = field.get(bean);
-			
-			if(value == null) {
-				field.set(request.getBean(), tenant);
-			}
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
+		if(request.getBean() instanceof TenantLoggedModel) {
+			TenantLoggedModel bean = (TenantLoggedModel) request.getBean();
+			bean.setTenant(getTenant());
 		}
-	}
-
-	private Field getTenantField(Class<?> cls) {
-		Field field = null;
-		
-		try {
-			field = cls.getDeclaredField(TENANT);
-		} catch (NoSuchFieldException | SecurityException e) {
-			if(!cls.getSuperclass().equals(Object.class)) {
-				return getTenantField(cls.getSuperclass());
-			}
-		}
-		
-		return field;
 	}
 
 	@Override

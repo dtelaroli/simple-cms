@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
@@ -25,7 +24,6 @@ public class Content extends TenantLoggedModel {
 	@Column(length = 1024)
 	private String summary;
 	
-	@Lob
 	private String body;
 	
 	@NotNull

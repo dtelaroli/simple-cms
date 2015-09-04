@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.dtelaroli</groupId>
-			<artifactId>simple-cms-domain</artifactId>
+			<artifactId>simple-cms-base</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
